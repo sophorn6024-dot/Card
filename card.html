@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
+    <!-- ទាញយក Tailwind CSS សម្រាប់ឌីហ្សាញ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ទាញយក QRCode.js ជំនាន់ថ្មី ដើរលឿនមិនងាយគាំង -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Khmer&family=Moul&display=swap');
+        body { font-family: 'Khmer', sans-serif; }
+        .khmer-moul { font-family: 'Moul', serif; }
+        
+        /* កូដសម្រាប់កំណត់ពេល Print កុំឲ្យជាប់ប៊ូតុង និង Form */
+        @media print {
+            body { background: white; padding: 0; }
+            .no-print { display: none; }
+            .print-area { box-shadow: none; margin: 0; padding: 0; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-50 to-amber-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- កន្លែងបញ្ចូលទិន្នន័យ (Form) -->
+        <div class="bg-white p-6 rounded-2xl shadow-xl no-print border border-amber-200">
+            <h2 class="text-xl font-bold text-amber-600 mb-6 border-b pb-2 flex items-center gap-2">
+                🏫 បញ្ចូលព័ត៌មានសិស្សបឋមសិក្សា
+            </h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ឈ្មោះសាលារៀន</label>
+                    <input type="text" id="schoolInput" value="សាលាបឋមសិក្សាកំពង់ល្ពៅ" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ឈ្មោះសិស្ស (ខ្មែរ)</label>
+                    <input type="text" id="nameKhInput" placeholder="ឧ. សុខ ណារី" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ឈ្មោះសិស្ស (ឡាតាំង)</label>
+                    <input type="text" id="nameEnInput" placeholder="ឧ. SOK NARY" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none uppercase">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ភេទ</label>
+                        <select id="genderInput" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                            <option value="ប្រុស">ប្រុស</option>
+                            <option value="ស្រី">ស្រី</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ថ្នាក់ទី</label>
+                        <input type="text" id="classInput" placeholder="ឧ. 4A ឬ 6B" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">អត្តលេខសិស្ស (ID)</label>
+                    <input type="text" id="idInput" placeholder="ឧ. KLP-2026-001" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">ជ្រើសរើសរូបថតសិស្ស</label>
+                    <input type="file" id="photoInput" accept="image/*" class="w-full p-1.5 border rounded-lg bg-gray-50 text-sm">
+                </div>
+                
+                <button onclick="generateCard()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200 mt-4 shadow-md">
+                    បង្កើតកាតសិស្ស (Generate)
+                </button>
+            </div>
+        </div>
+
+        <!-- កន្លែងបង្ហាញកាតសិស្ស (Preview & Print) -->
+        <div class="flex flex-col items-center justify-start space-y-6">
+            
+            <!-- ផ្ទាំងកាតសិស្ស (រចនាបទស្តង់ដាបឋមសិក្សា) -->
+            <div id="idCard" class="print-area w-[340px] h-[520px] bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-300 relative flex flex-col justify-between">
+                
+                <!-- ផ្នែកខាងលើ (Header) ពណ៌ទឹកក្រូច-លឿង បែបកុមារភាពស្រស់ស្រាយ -->
+                <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-center p-4 relative">
+                    <div class="absolute top-2 left-3 w-8 h-8 opacity-20 bg-white rounded-full"></div>
+                    <h3 id="cardSchool" class="khmer-moul text-xs tracking-wider mb-1 leading-relaxed">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
+                    <p class="text-[9px] uppercase font-semibold tracking-widest text-amber-100">Student Identity Card</p>
+                </div>
+
+                <!-- ផ្នែកកណ្តាល (រូបថត និងព័ត៌មាន) -->
+                <div class="flex-1 flex flex-col items-center pt-6 px-6 text-center">
+                    <!-- រូបថតសិស្ស -->
+                    <div class="w-28 h-36 bg-gray-100 border-4 border-amber-100 rounded-lg overflow-hidden shadow-md mb-4 flex items-center justify-center">
+                        <img id="cardPhoto" src="https://via.placeholder.com/150x200?text=Photo" alt="Student Photo" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- ឈ្មោះសិស្ស -->
+                    <h2 id="cardNameKh" class="text-xl font-bold text-gray-800 mb-0.5">ឈ្មោះសិស្ស</h2>
+                    <p id="cardNameEn" class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-4">STUDENT NAME</p>
+
+                    <!-- តារាងព័ត៌មានលម្អិត កែសម្រួលសម្រាប់ថ្នាក់បឋម -->
+                    <div class="w-full text-left text-sm space-y-2 text-gray-700 border-t pt-4">
+                        <div class="flex"><span class="w-24 font-medium text-gray-400">ភេទ / Sex:</span> <span id="cardGender" class="font-semibold">-</span></div>
+                        <div class="flex"><span class="w-24 font-medium text-gray-400">ថ្នាក់ទី / Class:</span> <span id="cardClass" class="font-semibold">-</span></div>
+                        <div class="flex"><span class="w-24 font-medium text-gray-400">អត្តលេខ / ID:</span> <span id="cardID" class="font-semibold text-orange-600">-</span></div>
+                    </div>
+                </div>
+
+                <!-- ផ្នែកខាងក្រោម (Footer & QR Code) -->
+                <div class="bg-amber-50 border-t border-amber-100 p-3 flex items-center justify-between px-6">
+                    <div class="text-left">
+                        <p class="text-[9px] text-gray-400">ឆ្នាំសិក្សា / School Year</p>
+                        <p class="text-xs font-bold text-gray-700">2025-2026</p>
+                    </div>
+                    <!-- QR Code container -->
+                    <div id="qrcode" class="bg-white p-1 border border-amber-200 rounded shadow-sm"></div>
+                </div>
+            </div>
+
+            <!-- ប៊ូតុងព្រីន -->
+            <button onclick="window.print()" class="no-print bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-200 flex items-center space-x-2">
+                <span>🖨️ បោះពុម្ព ឬរក្សាទុកជា PDF (Print)</span>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- JavaScript សម្រាប់ដំណើរការប្រព័ន្ធ -->
+    <script>
+        let qrcode;
+
+        // បង្កើត QR Code ដំបូងពេលបើក Page
+        window.onload = function() {
+            try {
+                qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: "KAMPONG_LPOU_PRIMARY_SCHOOL",
+                    width: 55,
+                    height: 55,
+                    colorDark : "#d97706",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+            } catch (e) {
+                console.log("QR Code Error, working standalone mode.");
+            }
+        };
+
+        // អនុគមន៍ទាញយកទិន្នន័យពី Form ទៅដាក់ក្នុងកាត
+        function generateCard() {
+            const school = document.getElementById('schoolInput').value;
+            const nameKh = document.getElementById('nameKhInput').value;
+            const nameEn = document.getElementById('nameEnInput').value;
+            const gender = document.getElementById('genderInput').value;
+            const studentClass = document.getElementById('classInput').value;
+            const idNumber = document.getElementById('idInput').value;
+            const photoInput = document.getElementById('photoInput');
+
+            // បញ្ចូលអក្សរទៅក្នុងកាត
+            if(school) document.getElementById('cardSchool').innerText = school;
+            if(nameKh) document.getElementById('cardNameKh').innerText = nameKh;
+            if(nameEn) document.getElementById('cardNameEn').innerText = nameEn.toUpperCase();
+            document.getElementById('cardGender').innerText = gender;
+            if(studentClass) document.getElementById('cardClass').innerText = studentClass;
+            if(idNumber) document.getElementById('cardID').innerText = idNumber;
+
+            // ផ្លាស់ប្តូររូបថត (បើមានការជ្រើសរើសរូបភាព)
+            if (photoInput.files && photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('cardPhoto').src = e.target.result;
+                }
+                reader.readAsDataURL(photoInput.files[0]);
+            }
+
+            // ធ្វើបច្ចុប្បន្នភាព QR Code ផ្អែកលើអត្តលេខសិស្ស
+            if(qrcode) {
+                if(idNumber) {
+                    qrcode.clear();
+                    qrcode.makeCode(idNumber);
+                } else {
+                    qrcode.clear();
+                    qrcode.makeCode("NO-ID");
+                }
+            }
+        }
+    </script>
+</body>
+</html>
