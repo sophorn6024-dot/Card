@@ -143,8 +143,36 @@
         let khmerDate = "";
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
-        // ឡូហ្គោផ្លូវការរបស់ក្រសួងអប់រំ យុវជន និងកីឡា (ទាញយកពីប្រភព CDN ដែលមានសុវត្ថិភាពខ្ពស់)
-        const schoolLogo = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Ministry_of_Education%2C_Youth_and_Sport_%28Cambodia%29_logo.svg/512px-Ministry_of_Education%2C_Youth_and_Sport_%28Cambodia%29_logo.svg.png";
+        // មូលហេតុមិនចេញឡូហ្គោគឺដោយសារការទាញយករូបភាពពីក្រៅជាប់ CORS (Security block) របស់ Browser ពេលបំលែងជា PDF។
+        // ដំណោះស្រាយ គឺការប្រើប្រាស់រូបភាពឡូហ្គោក្រសួងអប់រំជាលក្ខណៈ Pure Inline SVG (Vector) នៅក្នុងកូដផ្ទាល់តែម្តង ដែលធានាថាបង្ហាញច្បាស់ ១០០% គ្រប់ទីកន្លែង ទោះគ្មានអ៊ីនធឺណិតក៏ដោយ។
+        const svgMoeysLogo = `<svg viewBox="0 0 100 100" class="w-[24px] h-[24px] flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" fill="#ffffff" stroke="#eab308" stroke-width="2"/>
+            <circle cx="50" cy="50" r="44" fill="#1e3a8a"/>
+            <circle cx="50" cy="50" r="41" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,1"/>
+            <!-- Outer decorative rays representing knowledge rings -->
+            <circle cx="50" cy="50" r="38" fill="none" stroke="#eab308" stroke-width="0.75"/>
+            <!-- Core Central Element: Representing the Sacred Hamsa / Chuor (Sacred Bird/Lotus Emblem of MOEYS) -->
+            <g id="emblem-core" fill="#eab308">
+                <!-- Base / Pedestal (Lotus seat) -->
+                <path d="M25,72 Q50,82 75,72 Q65,65 50,65 Q35,65 25,72 Z" fill="#eab308"/>
+                <path d="M30,65 Q50,70 70,65 Q60,60 50,60 Q40,60 30,65 Z" fill="#ffffff" opacity="0.8"/>
+                <!-- Central Pillar / Candle Flame / Sacred Spire -->
+                <path d="M47,60 L53,60 L54,35 Q50,22 46,35 Z"/>
+                <!-- Glowing Aura Flame Behind Spire -->
+                <path d="M50,16 Q57,28 53,45 Q47,45 44,28 Z" fill="#f59e0b" opacity="0.9"/>
+                <!-- Left Wing / Elaborate Scrollwork -->
+                <path d="M46,40 Q26,30 22,50 Q28,62 45,55 Q32,50 35,42 Q42,42 46,46 Z"/>
+                <!-- Right Wing / Elaborate Scrollwork -->
+                <path d="M54,40 Q74,30 78,50 Q72,62 55,55 Q68,50 65,42 Q58,42 54,46 Z"/>
+                <!-- Inner small details for traditional Khmer ornament look -->
+                <circle cx="50" cy="30" r="2.5" fill="#ffffff"/>
+                <circle cx="50" cy="42" r="2" fill="#ffffff"/>
+                <circle cx="36" cy="48" r="1.5" fill="#ffffff"/>
+                <circle cx="64" cy="48" r="1.5" fill="#ffffff"/>
+                <!-- Lower banner scroll arches -->
+                <path d="M33,73 Q50,78 67,73" stroke="#ffffff" stroke-width="1" fill="none"/>
+            </g>
+        </svg>`;
 
         let cardsData = {};
         for(let i=1; i<=6; i++) {
@@ -232,7 +260,7 @@
                         
                         <div class="bg-[#1e3a8a] text-white pt-1 pb-0.5 px-2 flex flex-col items-center justify-center border-b-2 border-[#d97706] h-[38px] text-center w-full">
                             <div class="flex items-center justify-center gap-1.5 w-full">
-                                <img src="${schoolLogo}" crossorigin="anonymous" class="w-[22px] h-[22px] object-contain flex-shrink-0">
+                                ${svgMoeysLogo}
                                 <div class="khmer-moul text-[9.5px] leading-none tracking-wide" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
                             </div>
                             <p class="text-[5.5px] uppercase font-bold text-amber-300 tracking-wider leading-none mt-0.5 text-center w-full">Student Identity Card</p>
