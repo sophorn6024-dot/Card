@@ -20,7 +20,7 @@
             font-family: 'Moul', serif !important; 
         }
         
-        /* កំណត់ទម្រង់ទំព័រព្រីន A4 Landscape សន្លឹកបោះពុម្ព */
+        /* ទំព័រព្រីន A4 Landscape */
         .print-page { 
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
@@ -33,7 +33,7 @@
             page-break-inside: avoid !important;
         }
         
-        /* ទំហំកាតស្តង់ដារ 7.10cm x 9.20cm តាមរូបរាងពិតប្រាកដ */
+        /* ទំហំកាតស្តង់ដារ 7.10cm x 9.20cm */
         .card-item {
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
             border: 1px solid #cbd5e1 !important; 
@@ -47,7 +47,6 @@
             overflow: hidden;
             box-sizing: border-box !important;
             page-break-inside: avoid !important;
-            position: relative;
         }
     </style>
 </head>
@@ -88,7 +87,7 @@
                 <button onclick="selectCard(3)" id="btnCard3" class="py-2 px-4 rounded-lg font-bold text-xs transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">កាតទី ៣</button>
                 <button onclick="selectCard(4)" id="btnCard4" class="py-2 px-4 rounded-lg font-bold text-xs transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">កាតទី ៤</button>
                 <button onclick="selectCard(5)" id="btnCard5" class="py-2 px-4 rounded-lg font-bold text-xs transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">កាតទី ៥</button>
-                <button onclick="selectCard(6)" id="btnCard6" class="py-2.5 px-4 rounded-lg font-bold text-xs transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">កាតទី ៦</button>
+                <button onclick="selectCard(6)" id="btnCard6" class="py-2 px-4 rounded-lg font-bold text-xs transition-all bg-slate-100 text-slate-600 hover:bg-slate-200">កាតទី ៦</button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -119,7 +118,7 @@
                 </div>
                 <div class="md:col-span-2">
                     <label class="block text-xs font-bold text-slate-400 mb-1">ទីកន្លែងបច្ចុប្បន្ន</label>
-                    <input type="text" id="inputAddress" oninput="updateData()" placeholder="ឧ. ភូមិស្វាយជ្រំ" class="w-full p-2.5 border border-slate-200 rounded-lg outline-none focus:border-blue-500 bg-slate-50/50 text-sm">
+                    <input type="text" id="inputAddress" oninput="updateData()" placeholder="ឧ. ភូមិកំពង់ល្ពៅ" class="w-full p-2.5 border border-slate-200 rounded-lg outline-none focus:border-blue-500 bg-slate-50/50 text-sm">
                 </div>
                 <div class="md:col-span-3">
                     <label class="block text-xs font-bold text-slate-400 mb-1">រូបថតសិស្ស</label>
@@ -140,13 +139,13 @@
         let khmerDate = "";
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
-        // ឡូហ្គោផ្លូវការរបស់ក្រសួងអប់រំ យុវជន និងកីឡា (ទម្រង់ពិតប្រាកដច្បាស់ ១០០% ជា Base64)
-        const moeysLogoImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABgCAMAAAC6MqrnAAAAaVBMVEVHcEwAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDBv79zBAAAAIHRSTlMAIBAwQFBggKDA0ODw8PDw8PDw8PDw8PDw8PDw8PDw8MCg3B8AAAL3SURBMVRYw7WYa7eyMAyG0wIid7koCAr6//+bF0vbtgVka89a38w6Lw8hSdtMa8bjkpIsV1Xb1vU45pUorX/b76YkiizLskmSJXgVpCg9gsc/p96jM9H6VfI52re0+gV6vK67Wv3gY9Y99Nl8w2fT2O+jY6vfe/UenXgUorX6E7T8V819Fp068Tj9FDoTfAit3wZ9A30bXf6N7u9GZ1K/GfoD9HNo9QP0ffT4P3T6v9DpGfTf6By6A/ox9GvobBId0OfQT9FX6KcoOqIidCGoCDoTVf37/N667r8LgWp83h79DPrbXy+R/AAtH6CfoM/pWv6CHp8X6AvoC+h0X6DofDkIWhStX6NfoS+v6FfQv0Yn0vov9Mv9eov+M/pP0Of0vEDn0OfofC3/vEDPhR69956fV9f997Uf3v6Dzs9v9PnoO+g76Nvo96P9D960ftP68S963/fP6Odf0Of7N/rlD3ou9Ifo67+8vX33B/3688bXf9D5G/0++nP09R/e7fsh2n/5F8Z3n9DpaD9Af4B+Dv0gOv6L3vftH/Qn6Gv0e6++f0Wf96Pv3tGn9f0X+nP6FfT9N/r9X/Rn6OfQb9DPor9EX6Gfob9EwYn0EwN0Do3QA/QYenwaoCeh6HkR+gn66orOP6Ffo1/eonNodCL9An3zE/RLdGfRP0O/Rt9G97fosVcf/6InZNDpE/Sn9PshOnlYfwV9hYIdPToP6Gg/P6NfXqDngk73Kzot/bfo7DuhP9+ic+icG3oU6PFrdF6g76Bff9CvX9FjE+gD6Oeo6H7vL/pZ9Gfo6C16wA9eotNf0C/RhSg7XqCfoN+gj96706NHX6Evb9Ev9+gM+gz6gZ999I8D6DH0bXQP/e2Lp+/Qf6Kf30X79TvoZ9Fn0L+i90F0C0XPhB6H0Xb7jB7bB/T7K/oP9AsL9CDo8Ws07Oide9GZHHocRLeeV06gX/uLzkXpTInW+WjY/XwG/dof9GjYff+CfhGdnqDPf9EToY9v9Av0X/ToU+gcGnr/BfoU+j0UfR+dfY0+gD4fRe/f6G9wP0b73qP9E/pTFL3vIfoP9Av02Oej+7no7Cv0+wX60/wZ+vH09w90PoY+H0SPf0Zvvfpu6f8K/Ria9wX6MfrZOfTjf9H767v9E95VofwXoN7dAAAAAElFTkSuQmCC";
+        // ឡូហ្គោផ្លូវការរបស់ក្រសួងអប់រំ យុវជន និងកីឡា (Base64 ច្បាស់ល្អមិនបាត់រូបពេលទាញយក)
+        const moeysLogoImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABgCAMAAAC6MqrnAAAAaVBMVEVHcEwAAAAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDBv79zBAAAAIHRSTlMAIBAwQFBggKDA0ODw8PDw8PDw8PDw8PDw8PDw8PDwMCg3B8AAAL3SURBMVRYw7WYa7eyMAyG0wIid7koCAr6//+bF0vbtgVka89a38w6Lw8hSdtMa8bjkpIsV1Xb1vU45pUorX/b76YkiizLskmSJXgVpCg9gsc/p96jM9H6VfI52re0+gV6vK67Wv3gY9Y99Nl8w2fT2O+jY6vfe/UenXgUorX6E7T8V819Fp068Tj9FDoTfAit3wZ9A30bXf6N7u9GZ1K/GfoD9HNo9QP0ffT4P3T6v9DpGfTf6By6A/ox9GvobBId0OfQT9FX6KcoOqIidCGoCDoTVf37/N667r8LgWp83h79DPrbXy+R/AAtH6CfoM/pWv6CHp8X6AvoC+h0X6DofDkIWhStX6NfoS+v6FfQv0Yn0vov9Mv9eov+M/pP0Of0vEDn0OfofC3/vEDPhR69956fV9f997Uf3v6Dzs9v9PnoO+g76Nvo96P9D960ftP68S963/fP6Odf0Of7N/rlD3ou9Ifo67+8vX33B/3688bXf9D5G/0++nP09R/e7fsh2n/5F8Z3n9DpaD9Af4B+Dv0gOv6L3vftH/Qn6Gv0e6++f0Wf96Pv3tGn9f0X+nP6FfT9N/r9X/Rn6OfQb9DPor9EX6Gfob9EwYn0EwN0Do3QA/QYenwaoCeh6HkR+gn66orOP6Ffo1/eonNodCL9An3zE/RLdGfRP0O/Rt9G97fosVcf/6InZNDpE/Sn9PshOnlYfwV9hYIdPToP6Gg/P6NfXqDngk73Kzot/bfo7DuhP9+ic+icG3oU6PFrdF6g76Bff9CvX9FjE+gD6Oeo6H7vL/pZ9Gfo6C16wA9eotNf0C/RhSg7XqCfoN+gj96706NHX6Evb9Ev9+gM+gz6gZ999I8D6DH0bXQP/e2Lp+/Qf6Kf30X79TvoZ9Fn0L+i90F0C0XPhB6H0Xb7jB7bB/T7K/oP9AsL9CDo8Ws07Oide9GZHHocRLeeV06gX/uLzkXpTInW+WjY/XwG/dof9GjYff+CfhGdnqDPf9EToY9v9Av0X/ToU+gcGnr/BfoU+j0UfR+dfY0+gD4fRe/f6G9wP0b73qP9E/pTFL3vIfoP9Av02Oej+7no7Cv0+wX60/wZ+vH09w90PoY+H0SPf0Zvvfpu6f8K/Ria9wX6MfrZOfTjf9H767v9E95VofwXoN7dAAAAAElFTkSuQmCC";
 
         let cardsData = {};
         for(let i=1; i<=6; i++) {
             cardsData[i] = {
-                nameKh: `សិស្សទី ${i}`,
+                nameKh: `សิស្សទី ${i}`,
                 gender: "ប្រុស",
                 studentClass: "៤(ក)",
                 idNumber: `KLP-2026-00${i}`,
@@ -226,45 +225,45 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div style="background: linear-gradient(90deg, #1e3a8a 70%, #ea580c 100%);" class="text-white pt-2 pb-1.5 px-3 flex flex-col items-center justify-center border-b-2 border-[#eab308] h-[52px] text-center w-full">
+                        <div style="background: linear-gradient(90deg, #1e3a8a 72%, #ea580c 100%);" class="text-white pt-2 pb-1 px-2.5 flex flex-col items-center justify-center border-b-2 border-[#eab308] h-[48px] text-center w-full">
                             <div class="flex items-center justify-center gap-1.5 w-full">
-                                <img src="${moeysLogoImg}" class="w-[28px] h-[30px] object-contain flex-shrink-0" alt="MOEYS Logo">
-                                <div class="khmer-moul text-[11.5px] tracking-normal leading-none" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
+                                <img src="${moeysLogoImg}" class="w-[24px] h-[26px] object-contain flex-shrink-0" alt="MOEYS Logo">
+                                <div class="khmer-moul text-[10.5px] tracking-normal leading-none" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
                             </div>
-                            <p class="text-[7px] uppercase font-bold text-amber-300 tracking-wider leading-none mt-1 text-center w-full">Student Identity Card</p>
+                            <p class="text-[6.5px] uppercase font-bold text-amber-300 tracking-wider leading-none mt-1 text-center w-full">Student Identity Card</p>
                         </div>
 
-                        <div class="flex-1 flex flex-col items-center pt-2.5 px-4 bg-white">
-                            <div class="w-[74px] h-[92px] bg-slate-50 border border-slate-200 rounded overflow-hidden shadow-sm mb-2 flex items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center pt-2 px-3.5 bg-white">
+                            <div class="w-[70px] h-[86px] bg-slate-50 border border-slate-200 rounded overflow-hidden shadow-sm mb-1.5 flex items-center justify-center">
                                 <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
-                            <div class="text-[17px] font-bold text-blue-900 leading-none mb-3 text-center w-full truncate" style="font-family: 'Khmer', sans-serif !important; font-weight: 700;">${st.nameKh}</div>
+                            <div class="text-[14.5px] font-bold text-blue-900 leading-none mb-2 text-center w-full truncate" style="font-family: 'Khmer', sans-serif !important; font-weight: 700;">${st.nameKh}</div>
 
-                            <div class="w-full text-left space-y-1.5 text-[11.5px] text-slate-700 border-t border-slate-100 pt-2.5">
-                                <div class="flex"><span class="w-[74px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-900">${st.gender}</span></div>
-                                <div class="flex"><span class="w-[74px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-900">${st.studentClass}</span></div>
-                                <div class="flex"><span class="w-[74px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
-                                <div class="flex"><span class="w-[74px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-900">${st.dob}</span></div>
-                                <div class="flex"><span class="w-[74px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-900 truncate">${st.address}</span></div>
+                            <div class="w-full text-left space-y-1 text-[10.5px] text-slate-700 border-t border-slate-100 pt-2">
+                                <div class="flex"><span class="w-[66px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-800">${st.gender}</span></div>
+                                <div class="flex"><span class="w-[66px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-800">${st.studentClass}</span></div>
+                                <div class="flex"><span class="w-[66px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
+                                <div class="flex"><span class="w-[66px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-800">${st.dob}</span></div>
+                                <div class="flex"><span class="w-[66px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-800 truncate">${st.address}</span></div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 border-t border-slate-100 p-2 px-3 flex justify-between items-center h-[70px]">
-                            <div class="flex flex-col items-center justify-center w-[45px] -mt-1">
-                                <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm flex items-center justify-center w-[40px] h-[40px]"></div>
-                                <p class="text-[6.5px] text-slate-400 font-bold mt-0.5 text-center whitespace-nowrap tracking-wide">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
+                        <div class="bg-slate-50 border-t border-slate-100 p-2 px-3 flex justify-between items-center h-[65px]">
+                            <div class="flex flex-col items-center justify-center w-[42px] -mt-0.5">
+                                <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm flex items-center justify-center w-[36px] h-[36px]"></div>
+                                <p class="text-[6px] text-slate-400 font-bold mt-0.5 text-center whitespace-nowrap tracking-wide">២០២៥-២០២៦</p>
                             </div>
                             
-                            <div class="w-[170px] flex flex-col justify-between h-[58px] text-right">
-                                <div class="text-[8px] font-medium text-slate-400 leading-none block text-center truncate">
+                            <div class="w-[170px] flex flex-col justify-between h-[54px] text-right">
+                                <div class="text-[7.5px] font-medium text-slate-400 leading-none block text-center truncate">
                                     ${displayDate}
                                 </div>
-                                <div class="text-[10px] font-bold text-blue-900 leading-none text-center block my-0.5">
+                                <div class="text-[9.5px] font-bold text-blue-900 leading-none text-center block my-0.5">
                                     គ្រូបន្ទុកថ្នាក់
                                 </div>
-                                <div class="h-[12px]"></div> 
-                                <div class="text-[11px] font-bold text-slate-700 text-center border-t border-dashed border-slate-300 pt-0.5 block truncate">
+                                <div class="h-[10px]"></div> 
+                                <div class="text-[10px] font-bold text-slate-700 text-center border-t border-dashed border-slate-300 pt-0.5 block truncate">
                                     ${teacherName}
                                 </div>
                             </div>
@@ -275,13 +274,13 @@
                 container.innerHTML += cardHtml;
             }
 
-            // ដំណើរការបង្កើត QR Code កម្រិតច្បាស់ High ល្បឿនស្កេនលឿន ១០០%
+            // បង្កើត QR Code ឡើងវិញទំហំល្មមស្អាត
             for(let i=1; i<=6; i++) {
                 document.getElementById(`qr-node-${i}`).innerHTML = '';
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
-                    width: 40,
-                    height: 40,
+                    width: 36,
+                    height: 36,
                     colorDark : "#1e3a8a", 
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
@@ -289,7 +288,6 @@
             }
         }
 
-        // មុខងារទាញយកឯកសារជាប្រភេទ PDF ច្បាស់កម្រិតខ្ពស់ (Scale 4)
         function downloadPDFFile() {
             const element = document.getElementById('printPageContainer');
             const btn = document.querySelector('button[onclick="downloadPDFFile()"]');
