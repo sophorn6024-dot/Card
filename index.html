@@ -9,47 +9,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
-        /* បង្កប់ហ្វុងខ្មែរ Base64 ផ្ទាល់ដើម្បីឱ្យបណ្ណាល័យ PDF ចាប់យកបានត្រឹមត្រូវ ១០០% មិនរត់អក្សរ */
+        /* បង្កប់ហ្វុងខ្មែរ Base64 ការពារការរត់អក្សរ និងដាច់ស្រៈពេលទាញយកជា PDF */
         @font-face {
             font-family: 'Moul';
             src: url('https://fonts.gstatic.com/s/moul/v27/7cHpv4V0gN0e_mE_Z9g6wIs.woff2') format('woff2');
+            font-display: swap;
         }
         @font-face {
             font-family: 'Khmer';
             src: url('https://fonts.gstatic.com/s/khmer/v25/977MGA66tTM_6f_Fidp_XFf7.woff2') format('woff2');
+            font-display: swap;
         }
 
         body { 
             font-family: 'Khmer', sans-serif; 
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
         }
         .khmer-moul { font-family: 'Moul', serif !important; }
         
-        /* កំណត់ទំហំ Layout ឱ្យសមស្របជាមួយក្រដាស A4 Landscape មិនឱ្យធ្លាក់ទៅទំព័រទី ២ */
+        /* កំណត់ទំហំក្រដាស A4 Landscape ឱ្យរត់តែ ១ សន្លឹកគត់ ដាច់ខាតមិនឱ្យធ្លាក់ទំព័រ */
         .print-page { 
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
             gap: 4mm !important; 
-            width: 285mm !important; 
+            width: 265mm !important; 
+            max-height: 190mm !important;
             margin: 0 auto !important;
-            padding: 6mm 4mm !important;
+            padding: 2mm !important;
             box-sizing: border-box !important;
             background: white !important;
+            page-break-inside: avoid !important;
         }
+        
+        /* កែសម្រួលទំហំកាតឱ្យតូចល្មមស្អាត (8.2cm x 11.2cm) ដើម្បីកុំឱ្យធ្លាក់សន្លឹក */
         .card-item {
-            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
-            border: 0.5px solid #cbd5e1 !important; 
+            box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+            border: 0.5px solid #b9c9dc !important; 
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
-            width: 8.8cm !important;  
-            height: 12.2cm !important; 
+            width: 8.2cm !important;  
+            height: 11.2cm !important; 
             background: white !important;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             box-sizing: border-box !important;
+            page-break-inside: avoid !important;
         }
     </style>
 </head>
@@ -70,7 +76,7 @@
                     </div>
                 </div>
                 <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide">
-                    📥 ទាញយក PDF (Download PDF File)
+                    📥 ទាញយក PDF (សន្លឹកតែមួយគត់)
                 </button>
             </div>
 
@@ -109,7 +115,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-500 mb-1">ថ្នាក់ទី</label>
-                        <input type="text" id="inputClass" oninput="updateData()" placeholder="ឧ. 4 (ក)" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-slate-50 text-sm">
+                        <input type="text" id="inputClass" oninput="updateData()" placeholder="ឧ. ៤(ក)" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-slate-50 text-sm">
                     </div>
                 </div>
                 <div>
@@ -131,7 +137,7 @@
             </div>
         </div>
 
-        <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-300 max-w-[1100px] mx-auto overflow-x-auto">
+        <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-300 max-w-[1050px] mx-auto overflow-x-auto">
             <div id="printPageContainer" class="print-page bg-white">
                 </div>
         </div>
@@ -228,42 +234,42 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div class="bg-gradient-to-r from-blue-800 via-blue-700 to-amber-600 text-white pt-3 pb-2.5 px-2 text-center border-b-2 border-amber-400">
-                            <h3 class="khmer-moul text-[11px] tracking-wide leading-tight">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
-                            <p class="text-[8px] uppercase font-bold text-amber-200 tracking-widest mt-0.5">Student Identity Card</p>
+                        <div class="bg-[#1e3a8a] text-white pt-2.5 pb-2 px-1 text-center border-b-2 border-[#d97706]">
+                            <div class="khmer-moul text-[11px] leading-tight block w-full tracking-normal" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
+                            <p class="text-[7.5px] uppercase font-bold text-amber-300 tracking-wider mt-0.5">Student Identity Card</p>
                         </div>
 
-                        <div class="flex-1 flex flex-col items-center pt-3 px-4 bg-gradient-to-b from-white via-white to-blue-50/10">
-                            <div class="w-[85px] h-[105px] bg-slate-50 border-4 border-blue-100 rounded-lg overflow-hidden shadow-sm mb-2 flex items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center pt-2.5 px-3.5 bg-white">
+                            <div class="w-[80px] h-[98px] bg-slate-50 border-2 border-blue-100 rounded overflow-hidden shadow-sm mb-1.5 flex items-center justify-center">
                                 <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
-                            <h2 class="khmer-moul text-[14px] text-blue-950 leading-tight mb-2.5 text-center w-full truncate">${st.nameKh}</h2>
+                            <div class="khmer-moul text-[13px] text-blue-900 leading-tight mb-2 text-center w-full truncate" style="font-family: 'Moul', serif !important;">${st.nameKh}</div>
 
-                            <div class="w-full text-left space-y-1 text-[11px] text-slate-600 border-t border-slate-100 pt-2.5">
-                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
-                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
-                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
-                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-700">${st.dob}</span></div>
-                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-700 truncate">${st.address}</span></div>
+                            <div class="w-full text-left space-y-0.5 text-[10.5px] text-slate-600 border-t border-slate-100 pt-2">
+                                <div class="flex"><span class="w-[70px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
+                                <div class="flex"><span class="w-[70px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
+                                <div class="flex"><span class="w-[70px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
+                                <div class="flex"><span class="w-[70px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-700">${st.dob}</span></div>
+                                <div class="flex"><span class="w-[70px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-700 truncate">${st.address}</span></div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 border-t border-slate-100 p-2 px-3 flex justify-between items-center h-[75px]">
-                            <div class="flex flex-col items-center justify-center w-[55px]">
+                        <div class="bg-slate-50 border-t border-slate-100 p-1.5 px-2.5 flex justify-between items-center h-[70px]">
+                            <div class="flex flex-col items-center justify-center w-[50px]">
                                 <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm"></div>
-                                <p class="text-[6px] text-slate-400 font-bold mt-1 text-center whitespace-nowrap">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
+                                <p class="text-[5.5px] text-slate-400 font-bold mt-1 text-center whitespace-nowrap">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
                             </div>
                             
-                            <div class="w-[185px] flex flex-col justify-between h-[62px] text-right">
-                                <div class="text-[7.5px] font-bold text-slate-500 leading-none block text-center truncate">
+                            <div class="w-[175px] flex flex-col justify-between h-[58px] text-right">
+                                <div class="text-[7px] font-bold text-slate-500 leading-none block text-center truncate">
                                     ${displayDate}
                                 </div>
-                                <div class="text-[9px] font-black text-blue-800 leading-none text-center block my-0.5">
+                                <div class="text-[8.5px] font-bold text-blue-800 leading-none text-center block my-0.5">
                                     គ្រូបន្ទុកថ្នាក់
                                 </div>
-                                <div class="h-[18px]"></div> 
-                                <div class="text-[9.5px] font-black text-slate-700 text-center border-t border-dashed border-slate-300 pt-0.5 block truncate uppercase">
+                                <div class="h-[14px]"></div> 
+                                <div class="text-[9px] font-bold text-slate-700 text-center border-t border-dashed border-slate-300 pt-0.5 block truncate uppercase">
                                     ${displayTeacher}
                                 </div>
                             </div>
@@ -278,11 +284,11 @@
             for(let i=1; i<=6; i++) {
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
-                    width: 32,
-                    height: 32,
+                    width: 30,
+                    height: 30,
                     colorDark : "#1e3a8a", 
                     colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.H
+                    correctLevel : QRCode.CorrectLevel.M
                 });
             }
         }
@@ -291,18 +297,17 @@
             const element = document.getElementById('printPageContainer');
             
             const btn = document.querySelector('button[onclick="downloadPDFFile()"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = "⏳ កំពុងដំណើរការបង្កើត PDF...";
+            btn.innerHTML = "⏳ កំពុងទាញយក...";
             btn.disabled = true;
 
             const opt = {
-                margin:       [4, 2, 4, 2], // បង្រួមគែមក្រដាស PDF ឱ្យតូចដើម្បីកុំឱ្យធ្លាក់សន្លឹក
+                margin:       [3, 3, 3, 3], // កំណត់ Margin តូចបំផុតដើម្បីកុំឱ្យធ្លាក់សន្លឹក
                 filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ.pdf',
                 image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { 
-                    scale: 3, // បង្កើនកម្រិតភាពច្បាស់ខ្ពស់បំផុត
+                    scale: 3.5, // បង្កើនភាពច្បាស់របស់អក្សរខ្មែរ កុំឱ្យព្រិល
                     useCORS: true,
-                    letterRendering: false, // បិទវាដើម្បីឱ្យព្យញ្ជនៈ និងស្រៈខ្មែរភ្ជាប់គ្នាបានស្អាត
+                    letterRendering: false, // បិទវាដើម្បីកុំឱ្យដាច់ជើងអក្សរខ្មែរ
                     scrollX: 0,
                     scrollY: 0
                 }, 
@@ -310,11 +315,11 @@
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
-                btn.innerHTML = originalText;
+                btn.innerHTML = "📥 ទាញយក PDF (សន្លឹកតែមួយគត់)";
                 btn.disabled = false;
             }).catch(err => {
                 console.error(err);
-                btn.innerHTML = originalText;
+                btn.innerHTML = "📥 ទាញយក PDF (សន្លឹកតែមួយគត់)";
                 btn.disabled = false;
             });
         }
