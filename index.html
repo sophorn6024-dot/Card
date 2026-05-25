@@ -30,24 +30,24 @@
         .print-page { 
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
-            gap: 5mm !important; 
+            gap: 4mm !important; 
             width: 260mm !important; 
             margin: 0 auto !important;
-            padding: 5mm !important;
+            padding: 4mm !important;
             box-sizing: border-box !important;
             background: white !important;
             page-break-inside: avoid !important;
         }
         
-        /* កែសម្រួលទំហំកាតមកត្រឹម 7cm x 9cm តាមការស្នើសុំ */
+        /* កែសម្រួលទំហំកាតមកត្រឹម 7.10cm x 9.20cm តាមការស្នើសុំ */
         .card-item {
             box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
             border: 0.5px solid #a1b5cc !important; 
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
-            width: 7.0cm !important;  
-            height: 9.0cm !important; 
+            width: 7.10cm !important;  
+            height: 9.20cm !important; 
             background: white !important;
             border-radius: 6px;
             overflow: hidden;
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide">
-                    📥 ទាញយក PDF (ទំហំ 7x9cm តែមួយសន្លឹក)
+                    📥 ទាញយក PDF (ទំហំ 7.10x9.20cm តែមួយសន្លឹក)
                 </button>
             </div>
 
@@ -147,7 +147,7 @@
         let khmerDate = "";
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
-        // ប្រើប្រាស់តំណភ្ជាប់រូបភាព Logo ផ្លូវការ (PNG URL) ដើម្បីឱ្យបណ្ណាល័យ PDF ចាប់បានត្រឹមត្រូវ ១០០%
+        // ប្រើប្រាស់តំណភ្ជាប់រូបភាព Logo ផ្លូវការ (PNG URL)
         const schoolLogo = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Emblem_of_the_Ministry_of_Education%2C_Youth_and_Sport_%28Cambodia%29.png/120px-Emblem_of_the_Ministry_of_Education%2C_Youth_and_Sport_%28Cambodia%29.png";
 
         let cardsData = {};
@@ -234,16 +234,16 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div class="bg-[#1e3a8a] text-white pt-1.5 pb-1 px-2 flex items-center justify-center gap-1.5 border-b-2 border-[#d97706] h-[35px]">
+                        <div class="bg-[#1e3a8a] text-white pt-1.5 pb-1 px-2 flex items-center justify-center gap-1.5 border-b-2 border-[#d97706] h-[36px] text-center w-full">
                             <img src="${schoolLogo}" class="w-[22px] h-[22px] object-contain flex-shrink-0" crossOrigin="anonymous">
-                            <div class="text-left flex-1 min-w-0">
-                                <div class="khmer-moul text-[9px] leading-none truncate" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
-                                <p class="text-[6px] uppercase font-bold text-amber-300 tracking-tight leading-none mt-0.5">Student Identity Card</p>
+                            <div class="min-w-0 flex flex-col items-center justify-center">
+                                <div class="khmer-moul text-[9px] leading-none truncate w-full text-center" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
+                                <p class="text-[5.5px] uppercase font-bold text-amber-300 tracking-tight leading-none mt-0.5 text-center w-full">Student Identity Card</p>
                             </div>
                         </div>
 
-                        <div class="flex-1 flex flex-col items-center pt-1.5 px-2.5 bg-white">
-                            <div class="w-[66px] h-[78px] bg-slate-50 border border-blue-100 rounded overflow-hidden shadow-sm mb-1 flex items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center pt-1.5 px-3 bg-white">
+                            <div class="w-[68px] h-[80px] bg-slate-50 border border-blue-100 rounded overflow-hidden shadow-sm mb-1 flex items-center justify-center">
                                 <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
@@ -264,7 +264,7 @@
                                 <p class="text-[5px] text-slate-400 font-bold mt-0.5 text-center whitespace-nowrap">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
                             </div>
                             
-                            <div class="w-[150px] flex flex-col justify-between h-[50px] text-right">
+                            <div class="w-[155px] flex flex-col justify-between h-[50px] text-right">
                                 <div class="text-[6.5px] font-bold text-slate-500 leading-none block text-center truncate">
                                     ${displayDate}
                                 </div>
@@ -285,6 +285,7 @@
 
             // បង្កើត QR Code
             for(let i=1; i<=6; i++) {
+                document.getElementById(`qr-node-${i}`).innerHTML = ''; // លុបចោលកូដចាស់មុនបង្កើតថ្មី
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
                     width: 24,
@@ -304,12 +305,12 @@
             btn.disabled = true;
 
             const opt = {
-                margin:       [5, 4, 5, 4], 
+                margin:       [4, 4, 4, 4], 
                 filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ.pdf',
                 image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { 
-                    scale: 4, // កម្រិតភាពច្បាស់កម្រិតខ្ពស់
-                    useCORS: true, // បើកវាដើម្បីទាញយករូបភាព Logo ពីខាងក្រៅចូល PDF
+                    scale: 4, 
+                    useCORS: true, 
                     letterRendering: false,
                     scrollX: 0,
                     scrollY: 0
@@ -318,11 +319,11 @@
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
-                btn.innerHTML = "📥 ទាញយក PDF (ទំហំ 7x9cm តែមួយសន្លឹក)";
+                btn.innerHTML = "📥 ទាញយក PDF (ទំហំ 7.10x9.20cm តែមួយសន្លឹក)";
                 btn.disabled = false;
             }).catch(err => {
                 console.error(err);
-                btn.innerHTML = "📥 ទាញយក PDF (ទំហំ 7x9cm តែមួយសន្លឹក)";
+                btn.innerHTML = "📥 ទាញយក PDF (ទំហំ 7.10x9.20cm តែមួយសន្លឹក)";
                 btn.disabled = false;
             });
         }
