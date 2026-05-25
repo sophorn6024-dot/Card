@@ -147,8 +147,8 @@
         let khmerDate = "";
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
-        // Logo ក្រសួងអប់រំ យុវជន និងកីឡា (ទម្រង់ Vector SVG មិនបែករូបភាព)
-        const schoolLogo = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%23ffffff" stroke-width="2"/><circle cx="50" cy="50" r="40" fill="%231e3a8a"/><path d="M50 20 L25 45 L35 45 L35 75 L65 75 L65 45 L75 45 Z" fill="%23d97706"/><path d="M35 75 Q50 65 65 75 Z" fill="%23ffffff"/><circle cx="50" cy="45" r="8" fill="%23ffffff"/></svg>`;
+        // ប្រើប្រាស់តំណភ្ជាប់រូបភាព Logo ផ្លូវការ (PNG URL) ដើម្បីឱ្យបណ្ណាល័យ PDF ចាប់បានត្រឹមត្រូវ ១០០%
+        const schoolLogo = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Emblem_of_the_Ministry_of_Education%2C_Youth_and_Sport_%28Cambodia%29.png/120px-Emblem_of_the_Ministry_of_Education%2C_Youth_and_Sport_%28Cambodia%29.png";
 
         let cardsData = {};
         for(let i=1; i<=6; i++) {
@@ -234,8 +234,8 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div class="bg-[#1e3a8a] text-white pt-2 pb-1.5 px-2 flex items-center justify-center gap-1.5 border-b-2 border-[#d97706] h-[34px]">
-                            <img src="${schoolLogo}" class="w-[20px] h-[20px] object-contain">
+                        <div class="bg-[#1e3a8a] text-white pt-1.5 pb-1 px-2 flex items-center justify-center gap-1.5 border-b-2 border-[#d97706] h-[35px]">
+                            <img src="${schoolLogo}" class="w-[22px] h-[22px] object-contain flex-shrink-0" crossOrigin="anonymous">
                             <div class="text-left flex-1 min-w-0">
                                 <div class="khmer-moul text-[9px] leading-none truncate" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
                                 <p class="text-[6px] uppercase font-bold text-amber-300 tracking-tight leading-none mt-0.5">Student Identity Card</p>
@@ -308,8 +308,8 @@
                 filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ.pdf',
                 image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { 
-                    scale: 4, // បង្កើនកម្រិតភាពច្បាស់ឱ្យខ្ពស់បំផុត ការពារអក្សរ និង Logo ព្រិល
-                    useCORS: true,
+                    scale: 4, // កម្រិតភាពច្បាស់កម្រិតខ្ពស់
+                    useCORS: true, // បើកវាដើម្បីទាញយករូបភាព Logo ពីខាងក្រៅចូល PDF
                     letterRendering: false,
                     scrollX: 0,
                     scrollY: 0
