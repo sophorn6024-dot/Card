@@ -6,51 +6,33 @@
     <title>ប្រព័ន្ធបង្កើតកាតសិស្ស - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Khmer&family=Moul&display=swap');
         body { font-family: 'Khmer', sans-serif; }
         .khmer-moul { font-family: 'Moul', serif; }
         
-        @page {
-            size: A4 landscape;
-            margin: 0mm; 
+        /* លក្ខខណ្ឌកំណត់ពេល Preview និង Print លើកាត */
+        .print-page { 
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 5mm 6mm !important; 
+            width: 100% !important;
         }
-        @media print {
-            body { background: white; padding: 0; margin: 0; }
-            .no-print { display: none !important; }
-            
-            /* បង្ខំឱ្យរួមខ្នាត 90% លើ Tablet ដើម្បីការពារការធ្លាក់សន្លឹក */
-            .print-container {
-                box-shadow: none !important;
-                border: none !important;
-                padding: 10mm 5mm !important;
-                background: white !important;
-                width: 29.7cm !important;
-                height: 21.0cm !important;
-                box-sizing: border-box;
-                display: block !important;
-                transform: scale(0.90) !important; 
-                transform-origin: top center !important;
-            }
-            
-            .print-page { 
-                display: flex !important;
-                flex-direction: row !important;
-                flex-wrap: wrap !important;
-                justify-content: center !important;
-                align-items: center !important;
-                gap: 5mm 6mm !important; 
-                width: 100% !important;
-            }
-            .card-item {
-                box-shadow: none !important;
-                border: 0.5px solid #cbd5e1 !important; 
-                page-break-inside: avoid !important;
-                display: inline-flex !important;
-                flex-direction: column !important;
-                width: 7.15cm !important;  
-                height: 9.25cm !important; 
-            }
+        .card-item {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border: 0.5px solid #cbd5e1 !important; 
+            display: inline-flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            width: 7.15cm !important;  
+            height: 9.25cm !important; 
+            background: white !important;
+            border-radius: 12px;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -58,15 +40,15 @@
 
     <div class="max-w-7xl mx-auto space-y-6">
         
-        <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 no-print">
+        <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4 gap-4">
                 <div>
                     <h2 class="khmer-moul text-lg text-amber-600 tracking-wide">
                         ប្រព័ន្ធបង្កើតកាតសិស្សសាលាបឋមសិក្សាកំពង់ល្ពៅ
                     </h2>
                 </div>
-                <button onclick="window.print()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-md text-sm">
-                    📥 ទាញយក PDF (Download PDF)
+                <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-md text-sm">
+                    📥 ទាញយក PDF (Download PDF File)
                 </button>
             </div>
 
@@ -131,8 +113,8 @@
             </div>
         </div>
 
-        <div id="a4Wrapper" class="print-container bg-white p-4 rounded-2xl shadow-xl border border-slate-300 max-w-[960px] mx-auto overflow-x-auto">
-            <div id="printPageContainer" class="print-page">
+        <div class="bg-white p-4 rounded-2xl shadow-xl border border-slate-300 max-w-[960px] mx-auto overflow-x-auto">
+            <div id="printPageContainer" class="print-page p-4 bg-white">
                 </div>
         </div>
 
@@ -223,7 +205,7 @@
             for(let i=1; i<=6; i++) {
                 const st = cardsData[i];
                 const cardHtml = `
-                    <div class="card-item w-[7.15cm] h-[9.25cm] bg-white rounded-xl overflow-hidden relative flex flex-col justify-between text-center box-border border border-slate-200">
+                    <div class="card-item">
                         
                         <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white pt-2.5 pb-2 px-2 text-center border-b border-orange-400">
                             <h3 class="khmer-moul text-[8.5px] tracking-wide leading-tight">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
@@ -255,9 +237,7 @@
                             
                             <div class="text-right flex flex-col justify-between h-[52px] select-none w-[160px]">
                                 <p class="text-[7px] font-bold text-slate-500 tracking-tighter leading-none truncate">${displayDate}</p>
-                                <p class="text-[7.5px] font-bold text-slate-600 leading-none mt-0.5">ហត្ថលេខាគ្រូបន្ទុកថ្នាក់</p>
-                                <div class="h-3"></div> 
-                                <p class="text-[8px] font-black text-slate-700 text-center border-t border-dashed border-slate-300/80 pt-0.5 truncate uppercase">${displayTeacher}</p>
+                                <div class="flex-1"></div> <p class="text-[8px] font-black text-slate-700 text-center border-t border-dashed border-slate-300/80 pt-0.5 truncate uppercase">${displayTeacher}</p>
                             </div>
                         </div>
                     </div>
@@ -275,6 +255,23 @@
                     correctLevel : QRCode.CorrectLevel.H
                 });
             }
+        }
+
+        // មុខងារទាញយកជា File PDF ពិតប្រាកដសម្រាប់ Tablet
+        function downloadPDFFile() {
+            const element = document.getElementById('printPageContainer');
+            
+            // កំណត់ទម្រង់ PDF ជា A4 ផ្ដេក (Landscape) គែម 0mm ការពារការដាច់
+            const opt = {
+                margin:       [10, 8, 10, 8], // គែមខាងលើ ឆ្វេង ក្រោម ស្តាំ ជា mm
+                filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true }, // បង្កើនកម្រិតច្បាស់
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+
+            // ដំណើរការទាញយកហ្វាយ
+            html2pdf().set(opt).from(element).save();
         }
     </script>
 </body>
