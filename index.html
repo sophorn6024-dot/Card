@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ប្រព័ន្ធបង្កើតកាតសិស្សម្ដង ៦នាក់ - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
+    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស ៦នាក់ - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
@@ -11,274 +11,235 @@
         body { font-family: 'Khmer', sans-serif; }
         .khmer-moul { font-family: 'Moul', serif; }
         
-        /* ការកំណត់ទំហំឱ្យត្រូវស្តង់ដាក្រដាស A4 ពេលបោះពុម្ព */
+        /* កំណត់ទំហំក្រដាស A4 ពេលបោះពុម្ព */
         @page {
             size: A4 portrait;
-            margin: 10mm;
+            margin: 8mm;
         }
         @media print {
             body { background: white; padding: 0; }
             .no-print { display: none !important; }
             .print-page { 
                 display: grid !important; 
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 12px !important;
+                grid-template-columns: repeat(2, 1fr) !important; /* ២ ជួរឈរ */
+                gap: 15px !important;
                 width: 100% !important;
                 box-shadow: none !important;
                 padding: 0 !important;
             }
             .card-item {
                 box-shadow: none !important;
-                border: 1px solid #d1d5db !important;
+                border: 1px solid #cbd5e1 !important;
                 page-break-inside: avoid;
             }
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-orange-50 to-amber-100 min-h-screen p-4 md:p-8">
+<body class="bg-slate-100 min-h-screen p-4 md:p-6">
 
-    <div class="max-w-7xl mx-auto space-y-8">
+    <div class="max-w-7xl mx-auto space-y-6">
         
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 no-print">
-            <div class="bg-white p-6 rounded-2xl shadow-xl border border-amber-200 lg:col-span-1">
-                <h2 class="text-xl font-bold text-amber-600 mb-4 border-b pb-2 flex items-center gap-2">
-                    🏫 បញ្ចូលព័ត៌មានសិស្ស (ម្នាក់ៗ)
-                </h2>
-                
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">ឈ្មោះសាលារៀន</label>
-                        <input type="text" id="schoolInput" value="សាលាបឋមសិក្សាកំពង់ល្ពៅ" class="w-full p-2 border text-sm rounded-lg outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">ឈ្មោះសិស្ស (ខ្មែរ)</label>
-                        <input type="text" id="nameKhInput" placeholder="ឧ. សុខ ណារី" class="w-full p-2 border text-sm rounded-lg outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">ឈ្មោះសិស្ស (ឡាតាំង)</label>
-                        <input type="text" id="nameEnInput" placeholder="ឧ. SOK NARY" class="w-full p-2 border text-sm rounded-lg outline-none focus:ring-2 focus:ring-amber-500 uppercase">
-                    </div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div>
-                            <label class="block text-xs font-medium text-gray-700 mb-1">ភេទ</label>
-                            <select id="genderInput" class="w-full p-2 border text-sm rounded-lg outline-none focus:ring-2 focus:ring-amber-500">
-                                <option value="ប្រុស">ប្រុស</option>
-                                <option value="ស្រី">ស្រី</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-gray-700 mb-1">ថ្នាក់ទី</label>
-                            <input type="text" id="classInput" placeholder="ឧ. 4A" class="w-full p-2 border text-sm rounded-lg outline-none focus:ring-2 focus:ring-amber-500">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">អត្តលេខសិស្ស (ID)</label>
-                        <input type="text" id="idInput" placeholder="ឧ. KLP-2026-001" class="w-full p-2 border text-sm rounded-lg outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-gray-700 mb-1">ជ្រើសរើសរូបថត</label>
-                        <input type="file" id="photoInput" accept="image/*" class="w-full p-1 border text-xs rounded-lg bg-gray-50">
-                    </div>
-                    
-                    <button onclick="addStudentToList()" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 px-4 rounded-lg transition shadow-md mt-2">
-                        ➕ បន្ថែមទៅក្នុងបញ្ជី (Add to List)
-                    </button>
+        <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 no-print">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4 gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-amber-600 flex items-center gap-2">
+                        🏫 ប្រព័ន្ធគ្រប់គ្រង និងរចនាកាតសិស្សស្តង់ដា (ម្តង ៦ កាត)
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">សូមចុចរើសយក "កាតទី" នីមួយៗដើម្បីបញ្ចូលឈ្មោះសិស្សទៅតាមកាតនីមួយៗ</p>
                 </div>
+                <button onclick="window.print()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-md">
+                    🖨️ បោះពុម្ព ឬរក្សាទុកជា PDF (A4)
+                </button>
             </div>
 
-            <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 lg:col-span-2 flex flex-col justify-between">
+            <div class="flex flex-wrap gap-2 mb-6 bg-slate-50 p-2 rounded-xl border border-slate-200">
+                <button onclick="selectCard(1)" id="btnCard1" class="flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-amber-500 text-white shadow">កាតទី ១</button>
+                <button onclick="selectCard(2)" id="btnCard2" class="flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-white text-slate-600 hover:bg-slate-200">កាតទី ២</button>
+                <button onclick="selectCard(3)" id="btnCard3" class="flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-white text-slate-600 hover:bg-slate-200">កាតទី ៣</button>
+                <button onclick="selectCard(4)" id="btnCard4" class="flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-white text-slate-600 hover:bg-slate-200">កាតទី ៤</button>
+                <button onclick="selectCard(5)" id="btnCard5" class="flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-white text-slate-600 hover:bg-slate-200">កាតទី ៥</button>
+                <button onclick="selectCard(6)" id="btnCard6" class="flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-white text-slate-600 hover:bg-slate-200">កាតទី ៦</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
-                    <div class="flex justify-between items-center mb-4 border-b pb-2">
-                        <h2 class="text-xl font-bold text-gray-700 flex items-center gap-2">
-                            📋 បញ្ជីឈ្មោះសិស្សកាត (អតិបរមា ៦ នាក់)
-                        </h2>
-                        <span id="studentCount" class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">បានបញ្ចូល: 0/6 នាក់</span>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">ឈ្មោះសិស្ស (ភាសាខ្មែរ)</label>
+                    <input type="text" id="inputNameKh" oninput="updateData()" placeholder="ឧ. សុខ ណារី" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-amber-500 bg-slate-50">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">ឈ្មោះសិស្ស (ឡាតាំង)</label>
+                    <input type="text" id="inputNameEn" oninput="updateData()" placeholder="ឧ. SOK NARY" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-amber-500 uppercase bg-slate-50">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">ភេទ</label>
+                        <select id="inputGender" onchange="updateData()" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-amber-500 bg-slate-50">
+                            <option value="ប្រុស">ប្រុស</option>
+                            <option value="ស្រី">ស្រី</option>
+                        </select>
                     </div>
-                    
-                    <div class="overflow-x-auto max-h-[280px]">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                <tr>
-                                    <th class="px-4 py-2">អត្តលេខ</th>
-                                    <th class="px-4 py-2">ឈ្មោះខ្មែរ</th>
-                                    <th class="px-4 py-2">ឈ្មោះឡាតាំង</th>
-                                    <th class="px-4 py-2">ភេទ</th>
-                                    <th class="px-4 py-2">ថ្នាក់</th>
-                                    <th class="px-4 py-2 text-center">សកម្មភាព</th>
-                                </tr>
-                            </thead>
-                            <tbody id="studentTableBody">
-                                </tbody>
-                        </table>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 mb-1">ថ្នាក់ទី</label>
+                        <input type="text" id="inputClass" oninput="updateData()" placeholder="ឧ. 4A" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-amber-500 bg-slate-50">
                     </div>
                 </div>
-
-                <div class="flex gap-4 mt-4">
-                    <button onclick="clearAllStudents()" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2.5 px-4 rounded-lg transition">
-                        🗑️ លុបទាំងអស់
-                    </button>
-                    <button onclick="window.print()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-4 rounded-lg transition flex items-center justify-center gap-2 shadow-md">
-                        🖨️ បោះពុម្ព ឬសេវជា PDF ទំព័រ A4
-                    </button>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">អត្តលេខសិស្ស (ID)</label>
+                    <input type="text" id="inputID" oninput="updateData()" placeholder="ឧ. KLP-001" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-amber-500 bg-slate-50">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-xs font-bold text-slate-500 mb-1">ជ្រើសរើសរូបថតសិស្ស</label>
+                    <input type="file" id="inputPhoto" onchange="updatePhoto(this)" accept="image/*" class="w-full p-1.5 border border-slate-300 rounded-lg bg-slate-50 text-xs">
                 </div>
             </div>
         </div>
 
-        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-[1000px] mx-auto border border-gray-300">
-            <p class="text-center text-xs text-gray-400 mb-4 no-print">--- ទម្រង់មើលមុនពេលបោះពុម្ពលើក្រដាស A4 (Preview) ---</p>
+        <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-300 max-w-[840px] mx-auto">
+            <p class="text-center text-xs text-slate-400 mb-4 no-print">--- ទម្រង់មើលមុនពេលបោះពុម្ពលើក្រដាស A4 (Preview 3ជួរ x 2ជួរ) ---</p>
             
-            <div id="printPageContainer" class="print-page grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
-                <div class="col-span-full text-center py-12 text-gray-400 no-print">
-                     សូមបំពេញព័ត៌មានខាងលើ រួចចុច "បន្ថែមទៅក្នុងបញ្ជី" ដើម្បីបង្ហាញកាតសិស្សនៅត្រង់នេះ។
+            <div id="printPageContainer" class="print-page grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
                 </div>
-            </div>
         </div>
 
     </div>
 
     <script>
-        let studentsList = [];
+        // បង្កើត Object ផ្ទុកទិន្នន័យកាតទាំង ៦ លំនាំដើម
+        let currentCardIndex = 1;
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
-
-        // អនុគមន៍បន្ថែមសិស្សចូលក្នុងបញ្ជី (អតិបរមា៦)
-        function addStudentToList() {
-            if (studentsList.length >= 6) {
-                alert("អ្នកអាចបង្កើតកាតបានអតិបរមាត្រឹមតែ ៦ នាក់ប៉ុណ្ណោះក្នុងមួយសន្លឹក A4!");
-                return;
-            }
-
-            const school = document.getElementById('schoolInput').value;
-            const nameKh = document.getElementById('nameKhInput').value;
-            const nameEn = document.getElementById('nameEnInput').value;
-            const gender = document.getElementById('genderInput').value;
-            const studentClass = document.getElementById('classInput').value;
-            const idNumber = document.getElementById('idInput').value;
-            const photoInput = document.getElementById('photoInput');
-
-            if (!nameKh || !idNumber) {
-                alert("សូមបំពេញឈ្មោះសិស្ស និងអត្តលេខសិស្សជាដាច់ខាត!");
-                return;
-            }
-
-            const student = {
-                id: Date.now(),
-                school: school || "សាលាបឋមសិក្សាកំពង់ល្ពៅ",
-                nameKh: nameKh,
-                nameEn: nameEn.toUpperCase() || "STUDENT NAME",
-                gender: gender,
-                studentClass: studentClass || "-",
-                idNumber: idNumber,
+        
+        let cardsData = {};
+        for(let i=1; i<=6; i++) {
+            cardsData[i] = {
+                nameKh: `សិស្សទី ${i}`,
+                nameEn: `STUDENT NAME 0${i}`,
+                gender: "ប្រុស",
+                studentClass: "4A",
+                idNumber: `KLP-2026-00${i}`,
                 photo: defaultPhoto
             };
+        }
 
-            if (photoInput.files && photoInput.files[0]) {
+        // បង្ហាញកាតសិស្សទាំងអស់ពេលបើកកម្មវិធីដំបូង
+        window.onload = function() {
+            renderAllCards();
+            loadFormData();
+        };
+
+        // អនុគមន៍ប្តូរការជ្រើសរើសកាត (កាតទី១,២...៦)
+        function selectCard(index) {
+            currentCardIndex = index;
+            
+            // ដូរពណ៌ប៊ូតុងសកម្ម
+            for(let i=1; i<=6; i++) {
+                const btn = document.getElementById(`btnCard${i}`);
+                if(i === index) {
+                    btn.className = "flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-amber-500 text-white shadow";
+                } else {
+                    btn.className = "flex-1 min-w-[80px] py-2 px-3 rounded-lg font-bold text-sm transition bg-white text-slate-600 hover:bg-slate-200";
+                }
+            }
+            loadFormData();
+        }
+
+        // ចាក់ទិន្នន័យចូល Form ពេលប្តូរកាត
+        function loadFormData() {
+            const data = cardsData[currentCardIndex];
+            document.getElementById('inputNameKh').value = data.nameKh.includes("សិស្សទី") ? "" : data.nameKh;
+            document.getElementById('inputNameEn').value = data.nameEn.includes("STUDENT") ? "" : data.nameEn;
+            document.getElementById('inputGender').value = data.gender;
+            document.getElementById('inputClass').value = data.studentClass;
+            document.getElementById('inputID').value = data.idNumber;
+            document.getElementById('inputPhoto').value = ""; // clear file input
+        }
+
+        // ធ្វើបច្ចុប្បន្នភាពទិន្នន័យពេលវាយអក្សរក្នុង Form
+        function updateData() {
+            const index = currentCardIndex;
+            cardsData[index].nameKh = document.getElementById('inputNameKh').value || `សិស្សទី ${index}`;
+            cardsData[index].nameEn = document.getElementById('inputNameEn').value.toUpperCase() || `STUDENT NAME 0${index}`;
+            cardsData[index].gender = document.getElementById('inputGender').value;
+            cardsData[index].studentClass = document.getElementById('inputClass').value || "-";
+            cardsData[index].idNumber = document.getElementById('inputID').value || `KLP-00${index}`;
+            
+            renderAllCards();
+        }
+
+        // ធ្វើបច្ចុប្បន្នភាពរូបថតសិស្ស
+        function updatePhoto(input) {
+            if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    student.photo = e.target.result;
-                    studentsList.push(student);
-                    renderSystem();
+                    cardsData[currentCardIndex].photo = e.target.result;
+                    renderAllCards();
                 }
-                reader.readAsDataURL(photoInput.files[0]);
-            } else {
-                studentsList.push(student);
-                renderSystem();
+                reader.readAsDataURL(input.files[0]);
             }
-
-            // សម្អាត Form បន្ទាប់ពីបញ្ចូលរួច ដើម្បីងាយបំពេញម្នាក់ទៀត
-            document.getElementById('nameKhInput').value = '';
-            document.getElementById('nameEnInput').value = '';
-            document.getElementById('classInput').value = '';
-            document.getElementById('idInput').value = '';
-            document.getElementById('photoInput').value = '';
         }
 
-        // អនុគមន៍លុបសិស្សម្នាក់ចេញ
-        function deleteStudent(id) {
-            studentsList = studentsList.filter(item => item.id !== id);
-            renderSystem();
-        }
+        // អនុគមន៍បង្កើត និងបង្ហាញកាតទាំង ៦ ទៅលើអេក្រង់
+        function renderAllCards() {
+            const container = document.getElementById('printPageContainer');
+            container.innerHTML = '';
 
-        // លុបទាំងអស់
-        function clearAllStudents() {
-            studentsList = [];
-            renderSystem();
-        }
-
-        // អនុគមន៍បង្ហាញទិន្នន័យលើអេក្រង់ឡើងវិញ (Render Table & Cards)
-        function renderSystem() {
-            // ធ្វើបច្ចុប្បន្នភាពចំនួនសិស្ស
-            document.getElementById('studentCount').innerText = `បានបញ្ចូល: ${studentsList.length}/6 នាក់`;
-
-            // បង្ហាញក្នុងតារាងបញ្ជីឈ្មោះ
-            const tbody = document.getElementById('studentTableBody');
-            tbody.innerHTML = '';
-            studentsList.forEach(st => {
-                tbody.innerHTML += `
-                    <tr class="bg-white border-b hover:bg-gray-50 text-xs">
-                        <td class="px-4 py-2 font-medium text-gray-900">${st.idNumber}</td>
-                        <td class="px-4 py-2">${st.nameKh}</td>
-                        <td class="px-4 py-2">${st.nameEn}</td>
-                        <td class="px-4 py-2">${st.gender}</td>
-                        <td class="px-4 py-2">${st.studentClass}</td>
-                        <td class="px-4 py-2 text-center">
-                            <button onclick="deleteStudent(${st.id})" class="text-red-600 hover:underline">លុប</button>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            // បង្កើតកាតសិស្សក្នុងក្រដាស A4
-            const cardContainer = document.getElementById('printPageContainer');
-            cardContainer.innerHTML = '';
-
-            if (studentsList.length === 0) {
-                cardContainer.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 no-print">សូមបំពេញព័ត៌មានខាងលើ រួចចុច "បន្ថែមទៅក្នុងបញ្ជី" ដើម្បីបង្ហាញកាតសិស្សនៅត្រង់នេះ។</div>`;
-                return;
-            }
-
-            studentsList.forEach((st, index) => {
+            for(let i=1; i<=6; i++) {
+                const st = cardsData[i];
                 const cardHtml = `
-                    <div class="card-item w-[225px] h-[350px] bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 relative flex flex-col justify-between text-center text-xs">
-                        <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-2.5 relative">
-                            <h3 class="khmer-moul text-[8.5px] leading-tight">${st.school}</h3>
-                            <p class="text-[7.5px] uppercase font-semibold text-amber-100 tracking-wider">Student ID Card</p>
+                    <div class="card-item w-[370px] h-[230px] bg-white rounded-xl shadow-md overflow-hidden border border-slate-200 relative flex flex-col justify-between text-left">
+                        <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white p-2.5 px-4 flex justify-between items-center border-b border-orange-400">
+                            <div>
+                                <h3 class="khmer-moul text-[11px] leading-tight tracking-wide">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
+                                <p class="text-[8px] uppercase font-bold text-amber-100 tracking-widest mt-0.5">Student Identity Card</p>
+                            </div>
+                            <span class="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-bold no-print">កាតទី ${i}</span>
                         </div>
-                        <div class="flex-1 flex flex-col items-center pt-3 px-3">
-                            <div class="w-18 h-24 bg-gray-50 border-2 border-amber-100 rounded shadow-sm mb-2 overflow-hidden flex items-center justify-center">
-                                <img src="${st.photo}" class="w-full h-full object-cover">
+
+                        <div class="flex-1 flex p-3 gap-3 items-center bg-gradient-to-br from-white to-amber-50/20">
+                            <div class="flex flex-col items-center gap-1.5">
+                                <div class="w-[85px] h-[110px] bg-slate-50 border-2 border-amber-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center">
+                                    <img src="${st.photo}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-[7px] text-slate-400 uppercase font-semibold">អត្តលេខ / ID</p>
+                                    <p class="text-[11px] font-black text-orange-600 tracking-wide">${st.idNumber}</p>
+                                </div>
                             </div>
-                            <h2 class="text-sm font-bold text-gray-800 mb-0.5">${st.nameKh}</h2>
-                            <p class="text-[10px] font-semibold text-gray-400 uppercase tracking-tight mb-2">${st.nameEn}</p>
-                            <div class="w-full text-left space-y-1 text-gray-600 border-t pt-2 text-[11px]">
-                                <div class="flex"><span class="w-14 text-gray-400">ភេទ / Sex:</span><span class="font-semibold">${st.gender}</span></div>
-                                <div class="flex"><span class="w-14 text-gray-400">ថ្នាក់ទី / Class:</span><span class="font-semibold">${st.studentClass}</span></div>
-                                <div class="flex"><span class="w-14 text-gray-400">អត្តលេខ / ID:</span><span class="font-semibold text-orange-600">${st.idNumber}</span></div>
+
+                            <div class="flex-1 h-full flex flex-col justify-center border-l border-slate-100 pl-3 space-y-1.5">
+                                <div>
+                                    <h2 class="text-base font-black text-slate-800 leading-tight">${st.nameKh}</h2>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">${st.nameEn}</p>
+                                </div>
+                                <div class="space-y-1 text-[12px] text-slate-600 pt-1 border-t border-slate-100">
+                                    <div class="flex"><span class="w-16 font-medium text-slate-400">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
+                                    <div class="flex"><span class="w-16 font-medium text-slate-400">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
+                                    <div class="flex"><span class="w-16 font-medium text-slate-400">ឆ្នាំសិក្សា:</span><span class="font-bold text-slate-700">2025-2026</span></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="bg-amber-50 border-t border-amber-100 p-2 flex items-center justify-between px-3">
-                            <div class="text-left">
-                                <p class="text-[7px] text-gray-400">ឆ្នាំសិក្សា</p>
-                                <p class="text-[9px] font-bold text-gray-700">2025-2026</p>
+
+                        <div class="bg-slate-50 border-t border-slate-100 p-2 px-4 flex justify-between items-center">
+                            <div class="text-[8px] text-slate-400 flex items-center gap-1">
+                                <span>🎯 វិរិយភាព វិន័យ សីលធម៌ គុណភាព</span>
                             </div>
-                            <div id="qr-${index}" class="bg-white p-0.5 border border-amber-200 rounded"></div>
+                            <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm"></div>
                         </div>
                     </div>
                 `;
-                
-                cardContainer.innerHTML += cardHtml;
-            });
+                container.innerHTML += cardHtml;
+            }
 
-            // បង្កើត QR Code សម្រាប់កាតនីមួយៗបន្ទាប់ពី Render រួច
-            studentsList.forEach((st, index) => {
-                new QRCode(document.getElementById(`qr-${index}`), {
-                    text: st.idNumber,
-                    width: 38,
-                    height: 38,
+            // ហៅបណ្ណាល័យបង្កើត QR Code ដាក់ចូលកាតនីមួយៗ
+            for(let i=1; i<=6; i++) {
+                new QRCode(document.getElementById(`qr-node-${i}`), {
+                    text: cardsData[i].idNumber,
+                    width: 32,
+                    height: 32,
                     colorDark : "#d97706",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
                 });
-            });
+            }
         }
     </script>
 </body>
