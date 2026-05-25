@@ -145,7 +145,7 @@
         let cardsData = {};
         for(let i=1; i<=6; i++) {
             cardsData[i] = {
-                nameKh: `សิស្សទី ${i}`,
+                nameKh: "",
                 gender: "ប្រុស",
                 studentClass: "៤(ក)",
                 idNumber: `KLP-2026-00${i}`,
@@ -180,7 +180,7 @@
             document.getElementById('inputClass').value = data.studentClass;
             document.getElementById('inputID').value = data.idNumber;
             document.getElementById('inputDob').value = data.dob.includes("xx/xx") ? "" : data.dob;
-            document.getElementById('inputAddress').value = data.address.includes("ភូមិកំពង់") ? "" : data.address;
+            document.getElementById('inputAddress').value = data.address.includes("ភូមិកំពង់ល្ពៅ") ? "" : data.address;
             document.getElementById('inputPhoto').value = "";
         }
 
