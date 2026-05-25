@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស ៦នាក់ - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
+    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស ៦នាក់ (ក្រដាសផ្ដេក) - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
@@ -11,21 +11,22 @@
         body { font-family: 'Khmer', sans-serif; }
         .khmer-moul { font-family: 'Moul', serif; }
         
-        /* កំណត់ទំហំក្រដាស A4 ពេលបោះពុម្ព */
+        /* កំណត់ទំហំក្រដាស A4 ជាទម្រង់ផ្ដេក (Landscape) ពេលបោះពុម្ព */
         @page {
-            size: A4 portrait;
-            margin: 8mm;
+            size: A4 landscape;
+            margin: 6mm;
         }
         @media print {
             body { background: white; padding: 0; }
             .no-print { display: none !important; }
             .print-page { 
                 display: grid !important; 
-                grid-template-columns: repeat(2, 1fr) !important; /* ២ ជួរឈរ */
-                gap: 15px !important;
+                grid-template-columns: repeat(3, 1fr) !important; /* ៣ កាតក្នុងមួយជួរដេក */
+                gap: 12px !important;
                 width: 100% !important;
                 box-shadow: none !important;
                 padding: 0 !important;
+                background: white !important;
             }
             .card-item {
                 box-shadow: none !important;
@@ -43,12 +44,12 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4 gap-4">
                 <div>
                     <h2 class="text-xl font-bold text-amber-600 flex items-center gap-2">
-                        🏫 ប្រព័ន្ធគ្រប់គ្រង និងរចនាកាតសិស្សស្តង់ដា (ម្តង ៦ កាត)
+                        🏫 ប្រព័ន្ធកាតបញ្ឈរ លើក្រដាស A4 ផ្ដេក (ម្ដង ៦ កាត)
                     </h2>
-                    <p class="text-xs text-slate-400 mt-1">សូមចុចរើសយក "កាតទី" នីមួយៗដើម្បីបញ្ចូលឈ្មោះសិស្សទៅតាមកាតនីមួយៗ</p>
+                    <p class="text-xs text-slate-400 mt-1">ចុចជ្រើសរើស "កាតទី..." ដើម្បីប្តូរការបញ្ចូលព័ត៌មានទៅតាមកាតនីមួយៗ</p>
                 </div>
                 <button onclick="window.print()" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-md">
-                    🖨️ បោះពុម្ព ឬរក្សាទុកជា PDF (A4)
+                    🖨️ បោះពុម្ព ឬរក្សាទុកជា PDF (A4 ផ្ដេក)
                 </button>
             </div>
 
@@ -94,17 +95,16 @@
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-300 max-w-[840px] mx-auto">
-            <p class="text-center text-xs text-slate-400 mb-4 no-print">--- ទម្រង់មើលមុនពេលបោះពុម្ពលើក្រដាស A4 (Preview 3ជួរ x 2ជួរ) ---</p>
+        <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-300 max-w-[1120px] mx-auto overflow-x-auto">
+            <p class="text-center text-xs text-slate-400 mb-4 no-print">--- ទម្រង់មើលមុនពេលបោះពុម្ពលើក្រដាស A4 ផ្ដេក (ជួរដេកមាន៣កាត សរុប២ជួរ = ៦កាត) ---</p>
             
-            <div id="printPageContainer" class="print-page grid grid-cols-1 sm:grid-cols-2 gap-4 justify-items-center">
+            <div id="printPageContainer" class="print-page grid grid-cols-3 gap-3 justify-items-center w-[1050px] mx-auto">
                 </div>
         </div>
 
     </div>
 
     <script>
-        // បង្កើត Object ផ្ទុកទិន្នន័យកាតទាំង ៦ លំនាំដើម
         let currentCardIndex = 1;
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
@@ -120,17 +120,13 @@
             };
         }
 
-        // បង្ហាញកាតសិស្សទាំងអស់ពេលបើកកម្មវិធីដំបូង
         window.onload = function() {
             renderAllCards();
             loadFormData();
         };
 
-        // អនុគមន៍ប្តូរការជ្រើសរើសកាត (កាតទី១,២...៦)
         function selectCard(index) {
             currentCardIndex = index;
-            
-            // ដូរពណ៌ប៊ូតុងសកម្ម
             for(let i=1; i<=6; i++) {
                 const btn = document.getElementById(`btnCard${i}`);
                 if(i === index) {
@@ -142,7 +138,6 @@
             loadFormData();
         }
 
-        // ចាក់ទិន្នន័យចូល Form ពេលប្តូរកាត
         function loadFormData() {
             const data = cardsData[currentCardIndex];
             document.getElementById('inputNameKh').value = data.nameKh.includes("សិស្សទី") ? "" : data.nameKh;
@@ -150,10 +145,9 @@
             document.getElementById('inputGender').value = data.gender;
             document.getElementById('inputClass').value = data.studentClass;
             document.getElementById('inputID').value = data.idNumber;
-            document.getElementById('inputPhoto').value = ""; // clear file input
+            document.getElementById('inputPhoto').value = "";
         }
 
-        // ធ្វើបច្ចុប្បន្នភាពទិន្នន័យពេលវាយអក្សរក្នុង Form
         function updateData() {
             const index = currentCardIndex;
             cardsData[index].nameKh = document.getElementById('inputNameKh').value || `សិស្សទី ${index}`;
@@ -165,7 +159,6 @@
             renderAllCards();
         }
 
-        // ធ្វើបច្ចុប្បន្នភាពរូបថតសិស្ស
         function updatePhoto(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -177,7 +170,6 @@
             }
         }
 
-        // អនុគមន៍បង្កើត និងបង្ហាញកាតទាំង ៦ ទៅលើអេក្រង់
         function renderAllCards() {
             const container = document.getElementById('printPageContainer');
             container.innerHTML = '';
@@ -185,56 +177,47 @@
             for(let i=1; i<=6; i++) {
                 const st = cardsData[i];
                 const cardHtml = `
-                    <div class="card-item w-[370px] h-[230px] bg-white rounded-xl shadow-md overflow-hidden border border-slate-200 relative flex flex-col justify-between text-left">
-                        <div class="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white p-2.5 px-4 flex justify-between items-center border-b border-orange-400">
-                            <div>
-                                <h3 class="khmer-moul text-[11px] leading-tight tracking-wide">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
-                                <p class="text-[8px] uppercase font-bold text-amber-100 tracking-widest mt-0.5">Student Identity Card</p>
-                            </div>
-                            <span class="text-[9px] bg-white/20 px-2 py-0.5 rounded-full font-bold no-print">កាតទី ${i}</span>
+                    <div class="card-item w-[320px] h-[480px] bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200 relative flex flex-col justify-between text-center">
+                        
+                        <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-3.5 relative border-b border-orange-400">
+                            <h3 class="khmer-moul text-[10.5px] leading-relaxed tracking-wide">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
+                            <p class="text-[8px] uppercase font-bold text-amber-100 tracking-widest mt-0.5">Student Identity Card</p>
+                            <span class="absolute top-2 right-2 text-[8px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold no-print">កាតទី ${i}</span>
                         </div>
 
-                        <div class="flex-1 flex p-3 gap-3 items-center bg-gradient-to-br from-white to-amber-50/20">
-                            <div class="flex flex-col items-center gap-1.5">
-                                <div class="w-[85px] h-[110px] bg-slate-50 border-2 border-amber-200 rounded-lg overflow-hidden shadow-inner flex items-center justify-center">
-                                    <img src="${st.photo}" class="w-full h-full object-cover">
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-[7px] text-slate-400 uppercase font-semibold">អត្តលេខ / ID</p>
-                                    <p class="text-[11px] font-black text-orange-600 tracking-wide">${st.idNumber}</p>
-                                </div>
+                        <div class="flex-1 flex flex-col items-center pt-5 px-5 bg-gradient-to-b from-white to-amber-50/10">
+                            <div class="w-[100px] h-[130px] bg-slate-50 border-4 border-amber-100 rounded-xl overflow-hidden shadow-sm mb-3 flex items-center justify-center">
+                                <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
-                            <div class="flex-1 h-full flex flex-col justify-center border-l border-slate-100 pl-3 space-y-1.5">
-                                <div>
-                                    <h2 class="text-base font-black text-slate-800 leading-tight">${st.nameKh}</h2>
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">${st.nameEn}</p>
-                                </div>
-                                <div class="space-y-1 text-[12px] text-slate-600 pt-1 border-t border-slate-100">
-                                    <div class="flex"><span class="w-16 font-medium text-slate-400">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
-                                    <div class="flex"><span class="w-16 font-medium text-slate-400">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
-                                    <div class="flex"><span class="w-16 font-medium text-slate-400">ឆ្នាំសិក្សា:</span><span class="font-bold text-slate-700">2025-2026</span></div>
-                                </div>
+                            <h2 class="text-lg font-black text-slate-800 leading-snug mb-0.5">${st.nameKh}</h2>
+                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wide mb-4">${st.nameEn}</p>
+
+                            <div class="w-full text-left space-y-2 text-[13px] text-slate-600 border-t border-slate-100 pt-3">
+                                <div class="flex"><span class="w-24 font-medium text-slate-400">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
+                                <div class="flex"><span class="w-24 font-medium text-slate-400">ថ្នាក់ទី / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
+                                <div class="flex"><span class="w-24 font-medium text-slate-400">អត្តលេខ / ID:</span><span class="font-bold text-orange-600">${st.idNumber}</span></div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 border-t border-slate-100 p-2 px-4 flex justify-between items-center">
-                            <div class="text-[8px] text-slate-400 flex items-center gap-1">
-                                <span>🎯 វិរិយភាព វិន័យ សីលធម៌ គុណភាព</span>
+                        <div class="bg-amber-50/50 border-t border-amber-100 p-2.5 px-5 flex justify-between items-center">
+                            <div class="text-left">
+                                <p class="text-[7.5px] text-slate-400 uppercase font-medium">ឆ្នាំសិក្សា</p>
+                                <p class="text-[11px] font-bold text-slate-700">2025-2026</p>
                             </div>
-                            <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm"></div>
+                            <div id="qr-node-${i}" class="bg-white p-0.5 border border-amber-200 rounded shadow-sm"></div>
                         </div>
                     </div>
                 `;
                 container.innerHTML += cardHtml;
             }
 
-            // ហៅបណ្ណាល័យបង្កើត QR Code ដាក់ចូលកាតនីមួយៗ
+            // បង្កើត QR Code ដាក់ចូលកាតនីមួយៗ
             for(let i=1; i<=6; i++) {
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
-                    width: 32,
-                    height: 32,
+                    width: 38,
+                    height: 38,
                     colorDark : "#d97706",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
