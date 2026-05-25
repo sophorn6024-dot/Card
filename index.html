@@ -19,29 +19,36 @@
             body { background: white; padding: 0; margin: 0; }
             .no-print { display: none !important; }
             
+            /* បង្ខំឱ្យរួមខ្នាត 90% លើ Tablet ដើម្បីការពារការធ្លាក់សន្លឹក */
             .print-container {
                 box-shadow: none !important;
                 border: none !important;
-                padding: 8mm 10mm !important;
+                padding: 10mm 5mm !important;
                 background: white !important;
                 width: 29.7cm !important;
                 height: 21.0cm !important;
                 box-sizing: border-box;
-                transform: scale(0.96); 
-                transform-origin: top center;
+                display: block !important;
+                transform: scale(0.90) !important; 
+                transform-origin: top center !important;
             }
             
+            /* ប្តូរមកប្រើ flex-row ជំនួស grid ដើម្បីឱ្យ Tablet ងាយស្រួលយល់ */
             .print-page { 
-                display: grid !important; 
-                grid-template-columns: repeat(3, 7.15cm) !important; 
-                gap: 5mm 8mm !important; 
-                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
                 justify-content: center !important;
+                align-items: center !important;
+                gap: 5mm 6mm !important; 
+                width: 100% !important;
             }
             .card-item {
                 box-shadow: none !important;
                 border: 0.5px solid #cbd5e1 !important; 
-                page-break-inside: avoid;
+                page-break-inside: avoid !important;
+                display: inline-flex !important;
+                flex-direction: column !important;
                 width: 7.15cm !important;  
                 height: 9.25cm !important; 
             }
@@ -55,7 +62,7 @@
         <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200 no-print">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4 gap-4">
                 <div>
-                    <h2 class="khmer-moul text-xl text-amber-600 tracking-wide">
+                    <h2 class="khmer-moul text-lg text-amber-600 tracking-wide">
                         ប្រព័ន្ធបង្កើតកាតសិស្សសាលាបឋមសិក្សាកំពង់ល្ពៅ
                     </h2>
                 </div>
@@ -126,7 +133,7 @@
         </div>
 
         <div id="a4Wrapper" class="print-container bg-white p-4 rounded-2xl shadow-xl border border-slate-300 max-w-[960px] mx-auto overflow-x-auto">
-            <div id="printPageContainer" class="print-page flex flex-wrap gap-4 justify-center w-full mx-auto">
+            <div id="printPageContainer" class="print-page">
                 </div>
         </div>
 
