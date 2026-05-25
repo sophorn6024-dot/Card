@@ -12,26 +12,28 @@
         body { font-family: 'Khmer', sans-serif; }
         .khmer-moul { font-family: 'Moul', serif; }
         
+        /* កំណត់ផ្ទៃទំព័រ A4 ឱ្យត្រូវខ្នាតមិនឱ្យធ្លាក់ទំព័រ */
         .print-page { 
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: wrap !important;
-            justify-content: center !important;
-            align-items: center !important;
-            gap: 5mm 6mm !important; 
-            width: 100% !important;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 4mm !important; 
+            width: 275mm !important; /* ខ្នាតសុវត្ថិភាពសម្រាប់ A4 Landscape */
+            margin: 0 auto !important;
+            padding: 0 !important;
+            box-sizing: border-box !important;
         }
         .card-item {
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
             border: 0.5px solid #cbd5e1 !important; 
-            display: inline-flex !important;
+            display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
-            width: 7.15cm !important;  
-            height: 9.25cm !important; 
+            width: 8.6cm !important;  /* កែសម្រួលទំហំទទឹងឱ្យពេញខ្នាតក្រដាសស្អាត */
+            height: 12.0cm !important; /* កំណត់កម្ពស់ស្តង់ដារកាត */
             background: white !important;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
+            box-sizing: border-box !important;
         }
     </style>
 </head>
@@ -62,8 +64,8 @@
                     <input type="text" id="inputTeacherName" oninput="updateData()" placeholder="ឧ. សេង សុភាន់" class="w-full p-2.5 border border-blue-200 rounded-lg outline-none focus:border-blue-500 bg-white text-sm shadow-sm">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-blue-900 mb-1">📅 ថ្ងៃ ខែ ឆ្នាំ ខ្មែរ (ឧ. ថ្ងៃចន្ទ ៩កើត ខែជេស្ឋ ឆ្នាំមមី)</label>
-                    <input type="text" id="inputKhmerDate" oninput="updateData()" placeholder="ឧ. ថ្ងៃចន្ទ ៩កើត ខែជេស្ឋ ឆ្នាំមមី" class="w-full p-2.5 border border-blue-200 rounded-lg outline-none focus:border-blue-500 bg-white text-sm shadow-sm">
+                    <label class="block text-xs font-bold text-blue-900 mb-1">📅 ថ្ងៃ ខែ ឆ្នាំ ខ្មែរ (ឧ. ៩កើត ខែជេស្ឋ ឆ្នាំមមី)</label>
+                    <input type="text" id="inputKhmerDate" oninput="updateData()" placeholder="ឧ. ៩កើត ខែជេស្ឋ ឆ្នាំមមី" class="w-full p-2.5 border border-blue-200 rounded-lg outline-none focus:border-blue-500 bg-white text-sm shadow-sm">
                 </div>
             </div>
 
@@ -79,7 +81,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 mb-1">ឈ្មោះសិស្ស (ខ្មែរ)</label>
-                    <input type="text" id="inputNameKh" oninput="updateData()" placeholder="ឧ. កេះ​ លីណា" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-slate-50 text-sm">
+                    <input type="text" id="inputNameKh" oninput="updateData()" placeholder="ឧ. សុខ ណារី" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-slate-50 text-sm">
                 </div>
                 <div class="grid grid-cols-2 gap-2">
                     <div>
@@ -91,7 +93,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-slate-500 mb-1">ថ្នាក់ទី</label>
-                        <input type="text" id="inputClass" oninput="updateData()" placeholder="ឧ. 4 (ក)" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-slate-50 text-sm">
+                        <input type="text" id="inputClass" oninput="updateData()" placeholder="ឧ. 4A" class="w-full p-2.5 border border-slate-300 rounded-lg outline-none focus:border-blue-500 bg-slate-50 text-sm">
                     </div>
                 </div>
                 <div>
@@ -113,8 +115,8 @@
             </div>
         </div>
 
-        <div class="bg-white p-4 rounded-2xl shadow-xl border border-slate-300 max-w-[960px] mx-auto overflow-x-auto">
-            <div id="printPageContainer" class="print-page p-4 bg-white">
+        <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-300 max-w-[1000px] mx-auto overflow-x-auto">
+            <div id="printPageContainer" class="print-page bg-white">
                 </div>
         </div>
 
@@ -198,12 +200,12 @@
             container.innerHTML = '';
             const displayTeacher = teacherName || "....................................";
             
-            // កំណត់ទម្រង់អក្សរ ធ្វើនៅកំពង់ល្ពៅ ថ្ងៃ...
+            // បង្រួមនិងរៀបចំអត្ថបទមិនឱ្យធ្លាក់ជួរដាច់ខាត
             let displayDate = "";
             if(document.getElementById('inputKhmerDate').value) {
-                displayDate = "ធ្វើនៅកំពង់ល្ពៅ, " + document.getElementById('inputKhmerDate').value;
+                displayDate = "ធ្វើនៅកំពង់ល្ពៅ, ថ្ងៃ" + document.getElementById('inputKhmerDate').value;
             } else {
-                displayDate = "ធ្វើនៅកំពង់ល្ពៅ, ថ្ងៃ...........ខែ...........ឆ្នាំ............";
+                displayDate = "ធ្វើនៅកំពង់ល្ពៅ, ថ្ងៃ.......ខែ.......ឆ្នាំ.......";
             }
 
             for(let i=1; i<=6; i++) {
@@ -211,38 +213,38 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div class="bg-gradient-to-r from-blue-800 via-blue-700 to-amber-600 text-white pt-2.5 pb-2 px-2 text-center border-b-2 border-amber-400">
-                            <h3 class="khmer-moul text-[8.5px] tracking-wide leading-tight">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
-                            <p class="text-[7px] uppercase font-bold text-amber-200 tracking-widest mt-0.5">Student Identity Card</p>
+                        <div class="bg-gradient-to-r from-blue-800 via-blue-700 to-amber-600 text-white pt-3 pb-2.5 px-2 text-center border-b-2 border-amber-400">
+                            <h3 class="khmer-moul text-[11px] tracking-wide leading-tight">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
+                            <p class="text-[8px] uppercase font-bold text-amber-200 tracking-widest mt-0.5">Student Identity Card</p>
                         </div>
 
-                        <div class="flex-1 flex flex-col items-center pt-3 px-2.5 bg-gradient-to-b from-white via-white to-blue-50/20">
-                            <div class="w-[72px] h-[92px] bg-slate-50 border-4 border-blue-100 rounded-lg overflow-hidden shadow-sm mb-2 flex items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center pt-4 px-4 bg-gradient-to-b from-white via-white to-blue-50/20">
+                            <div class="w-[85px] h-[110px] bg-slate-50 border-4 border-blue-100 rounded-lg overflow-hidden shadow-sm mb-3 flex items-center justify-center">
                                 <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
-                            <h2 class="text-[14px] font-black text-blue-900 leading-tight mb-2.5 tracking-wide">${st.nameKh}</h2>
+                            <h2 class="text-[16px] font-black text-blue-900 leading-tight mb-3 tracking-wide">${st.nameKh}</h2>
 
-                            <div class="w-full text-left space-y-0.5 text-[10px] text-slate-600 border-t border-slate-100 pt-2">
-                                <div class="flex"><span class="w-[60px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
-                                <div class="flex"><span class="w-[60px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
-                                <div class="flex"><span class="w-[60px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
-                                <div class="flex"><span class="w-[60px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-700 text-[9.5px]">${st.dob}</span></div>
-                                <div class="flex"><span class="w-[60px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-700 truncate text-[9.5px]">${st.address}</span></div>
+                            <div class="w-full text-left space-y-1 text-[11px] text-slate-600 border-t border-slate-100 pt-3">
+                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
+                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
+                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
+                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-700">${st.dob}</span></div>
+                                <div class="flex"><span class="w-[75px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-700 truncate">${st.address}</span></div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 border-t border-slate-100 p-1.5 px-2 flex justify-between items-end">
+                        <div class="bg-slate-50 border-t border-slate-100 p-2 px-3 flex justify-between items-end">
                             <div class="flex flex-col items-center gap-0.5">
                                 <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm"></div>
-                                <p class="text-[6px] text-slate-400 font-bold">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
+                                <p class="text-[7px] text-slate-400 font-bold mt-0.5">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
                             </div>
                             
-                            <div class="text-right flex flex-col justify-between h-[56px] select-none w-[165px]">
-                                <p class="text-[5.8px] font-bold text-slate-500 tracking-tighter leading-none truncate">${displayDate}</p>
-                                <p class="text-[7px] font-bold text-blue-800 leading-none text-center mt-0.5">គ្រូបន្ទុកថ្នាក់</p>
+                            <div class="text-right flex flex-col justify-between h-[65px] select-none w-[175px]">
+                                <p class="text-[7.5px] font-bold text-slate-500 tracking-tight leading-none text-center truncate">${displayDate}</p>
+                                <p class="text-[9px] font-black text-blue-800 leading-none text-center mt-1">គ្រូបន្ទុកថ្នាក់</p>
                                 
-                                <div class="flex-1 h-4"></div> <p class="text-[8px] font-black text-slate-700 text-center border-t border-dashed border-slate-300/80 pt-0.5 truncate uppercase">${displayTeacher}</p>
+                                <div class="flex-1 h-4"></div> <p class="text-[9.5px] font-black text-slate-700 text-center border-t border-dashed border-slate-300 pt-1 truncate uppercase">${displayTeacher}</p>
                             </div>
                         </div>
                     </div>
@@ -253,8 +255,8 @@
             for(let i=1; i<=6; i++) {
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
-                    width: 26,
-                    height: 26,
+                    width: 32,
+                    height: 32,
                     colorDark : "#1e3a8a", 
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
@@ -266,7 +268,7 @@
             const element = document.getElementById('printPageContainer');
             
             const opt = {
-                margin:       [10, 8, 10, 8], 
+                margin:       [10, 5, 10, 5], /* រក្សាគែមសុវត្ថិភាពខ្ពស់បំផុត */
                 filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true }, 
