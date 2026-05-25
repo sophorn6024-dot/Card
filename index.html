@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
+    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស - កំណែអក្សរធំច្បាស់</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -28,25 +28,25 @@
         .print-page { 
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
-            gap: 4mm !important; 
-            width: 260mm !important; 
+            gap: 5mm !important; 
+            width: 270mm !important; 
             margin: 0 auto !important;
-            padding: 4mm !important;
+            padding: 5mm !important;
             box-sizing: border-box !important;
             background: white !important;
             page-break-inside: avoid !important;
         }
         
         .card-item {
-            box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
-            border: 0.5px solid #a1b5cc !important; 
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.15);
+            border: 1px solid #94a3b8 !important; 
             display: flex !important;
             flex-direction: column !important;
             justify-content: space-between !important;
             width: 7.10cm !important;  
             height: 9.20cm !important; 
             background: white !important;
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
             box-sizing: border-box !important;
             page-break-inside: avoid !important;
@@ -60,27 +60,28 @@
         <div class="bg-white p-6 rounded-2xl shadow-lg border border-slate-200">
             <div class="flex flex-col md:flex-row justify-between items-center border-b pb-5 mb-5 gap-4">
                 <div class="flex items-center gap-4 text-center md:text-left flex-col md:flex-row w-full md:w-auto">
-                    <div class="w-16 h-16 bg-gradient-to-tr from-blue-700 to-amber-500 rounded-full flex items-center justify-center shadow-md text-white text-2xl font-bold border-2 border-white ring-4 ring-blue-50">
+                    <div class="w-16 h-16 bg-gradient-to-tr from-blue-700 to-amber-500 rounded-full flex items-center justify-center shadow-md text-white text-2xl font-bold border-2 border-white">
                         🏫
                     </div>
                     <div>
                         <h2 class="khmer-moul text-xl text-blue-800 tracking-wide leading-snug">
-                            ប្រព័ន្ធបង្កើតកាតសិស្សសាលាបឋមសិក្សាកំពង់ល្ពៅ
+                            ប្រព័ន្ធបង្កើតកាតសិស្ស - សាលាបឋមសិក្សាកំពង់ល្ពៅ
                         </h2>
+                        <p class="text-sm text-emerald-600 font-bold">✨ កំណែអក្សរធំច្បាស់ពិសេស (Large Font Version)</p>
                     </div>
                 </div>
-                <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-sm tracking-wide">
-                    📥 ទាញយក PDF
+                <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3px-8 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-lg px-6 py-3">
+                    📥 ទាញយកជា PDF
                 </button>
             </div>
 
             <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-bold text-blue-900 mb-1">👤 ឈ្មោះគ្រូបន្ទុកថ្នាក់</label>
+                    <label class="block text-sm font-bold text-blue-900 mb-1">👤 ឈ្មោះគ្រូបន្ទុកថ្នាក់</label>
                     <input type="text" id="inputTeacherName" oninput="updateData()" placeholder="ឧ. សេង សុភាន់" class="w-full p-2.5 border border-blue-200 rounded-lg outline-none focus:border-blue-500 bg-white text-sm shadow-sm">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-blue-900 mb-1">📅 ថ្ងៃ ខែ ឆ្នាំ ខ្មែរ</label>
+                    <label class="block text-sm font-bold text-blue-900 mb-1">📅 ថ្ងៃ ខែ ឆ្នាំ ខ្មែរ</label>
                     <input type="text" id="inputKhmerDate" oninput="updateData()" placeholder="ឧ. ថ្ងៃចន្ទ ទី២៥ ខែឧសភា ឆ្នាំ២០២៦" class="w-full p-2.5 border border-blue-200 rounded-lg outline-none focus:border-blue-500 bg-white text-sm shadow-sm">
                 </div>
             </div>
@@ -131,7 +132,7 @@
             </div>
         </div>
 
-        <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-300 max-w-[1000px] mx-auto overflow-x-auto">
+        <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-300 max-w-[1100px] mx-auto overflow-x-auto">
             <div id="printPageContainer" class="print-page bg-white"></div>
         </div>
 
@@ -143,34 +144,16 @@
         let khmerDate = "";
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
-        // មូលហេតុមិនចេញឡូហ្គោគឺដោយសារការទាញយករូបភាពពីក្រៅជាប់ CORS (Security block) របស់ Browser ពេលបំលែងជា PDF។
-        // ដំណោះស្រាយ គឺការប្រើប្រាស់រូបភាពឡូហ្គោក្រសួងអប់រំជាលក្ខណៈ Pure Inline SVG (Vector) នៅក្នុងកូដផ្ទាល់តែម្តង ដែលធានាថាបង្ហាញច្បាស់ ១០០% គ្រប់ទីកន្លែង ទោះគ្មានអ៊ីនធឺណិតក៏ដោយ។
-        const svgMoeysLogo = `<svg viewBox="0 0 100 100" class="w-[24px] h-[24px] flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
+        // ឡូហ្គោក្រសួងអប់រំ បែប Vector SVG បង្ហាញច្បាស់ ១០០% មិនបារម្ភរឿងបាត់រូបភាព
+        const moeysLogoSVG = `<svg viewBox="0 0 100 100" class="w-[28px] h-[28px] flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="50" r="48" fill="#ffffff" stroke="#eab308" stroke-width="2"/>
             <circle cx="50" cy="50" r="44" fill="#1e3a8a"/>
-            <circle cx="50" cy="50" r="41" fill="none" stroke="#ffffff" stroke-width="1" stroke-dasharray="2,1"/>
-            <!-- Outer decorative rays representing knowledge rings -->
-            <circle cx="50" cy="50" r="38" fill="none" stroke="#eab308" stroke-width="0.75"/>
-            <!-- Core Central Element: Representing the Sacred Hamsa / Chuor (Sacred Bird/Lotus Emblem of MOEYS) -->
-            <g id="emblem-core" fill="#eab308">
-                <!-- Base / Pedestal (Lotus seat) -->
-                <path d="M25,72 Q50,82 75,72 Q65,65 50,65 Q35,65 25,72 Z" fill="#eab308"/>
-                <path d="M30,65 Q50,70 70,65 Q60,60 50,60 Q40,60 30,65 Z" fill="#ffffff" opacity="0.8"/>
-                <!-- Central Pillar / Candle Flame / Sacred Spire -->
+            <g fill="#eab308">
+                <path d="M25,72 Q50,82 75,72 Q65,65 50,65 Q35,65 25,72 Z"/>
                 <path d="M47,60 L53,60 L54,35 Q50,22 46,35 Z"/>
-                <!-- Glowing Aura Flame Behind Spire -->
-                <path d="M50,16 Q57,28 53,45 Q47,45 44,28 Z" fill="#f59e0b" opacity="0.9"/>
-                <!-- Left Wing / Elaborate Scrollwork -->
+                <path d="M50,16 Q57,28 53,45 Q47,45 44,28 Z" fill="#f59e0b"/>
                 <path d="M46,40 Q26,30 22,50 Q28,62 45,55 Q32,50 35,42 Q42,42 46,46 Z"/>
-                <!-- Right Wing / Elaborate Scrollwork -->
                 <path d="M54,40 Q74,30 78,50 Q72,62 55,55 Q68,50 65,42 Q58,42 54,46 Z"/>
-                <!-- Inner small details for traditional Khmer ornament look -->
-                <circle cx="50" cy="30" r="2.5" fill="#ffffff"/>
-                <circle cx="50" cy="42" r="2" fill="#ffffff"/>
-                <circle cx="36" cy="48" r="1.5" fill="#ffffff"/>
-                <circle cx="64" cy="48" r="1.5" fill="#ffffff"/>
-                <!-- Lower banner scroll arches -->
-                <path d="M33,73 Q50,78 67,73" stroke="#ffffff" stroke-width="1" fill="none"/>
             </g>
         </svg>`;
 
@@ -244,7 +227,6 @@
         function renderAllCards() {
             const container = document.getElementById('printPageContainer');
             container.innerHTML = '';
-            const displayTeacher = teacherName || "....................................";
             
             let displayDate = "";
             if(document.getElementById('inputKhmerDate').value) {
@@ -258,46 +240,46 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div class="bg-[#1e3a8a] text-white pt-1 pb-0.5 px-2 flex flex-col items-center justify-center border-b-2 border-[#d97706] h-[38px] text-center w-full">
-                            <div class="flex items-center justify-center gap-1.5 w-full">
-                                ${svgMoeysLogo}
-                                <div class="khmer-moul text-[9.5px] leading-none tracking-wide" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
+                        <div class="bg-[#1e3a8a] text-white pt-2 pb-1 px-2 flex flex-col items-center justify-center border-b-2 border-[#d97706] h-[46px] text-center w-full">
+                            <div class="flex items-center justify-center gap-2 w-full">
+                                ${moeysLogoSVG}
+                                <div class="khmer-moul text-[12.5px] leading-none tracking-wide" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
                             </div>
-                            <p class="text-[5.5px] uppercase font-bold text-amber-300 tracking-wider leading-none mt-0.5 text-center w-full">Student Identity Card</p>
+                            <p class="text-[7px] uppercase font-bold text-amber-300 tracking-wider leading-none mt-1 text-center w-full">Student Identity Card</p>
                         </div>
 
-                        <div class="flex-1 flex flex-col items-center pt-1.5 px-3 bg-white">
-                            <div class="w-[68px] h-[80px] bg-slate-50 border border-blue-100 rounded overflow-hidden shadow-sm mb-1 flex items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center pt-2.5 px-3 bg-white">
+                            <div class="w-[75px] h-[92px] bg-slate-50 border border-slate-300 rounded overflow-hidden shadow-sm mb-1.5 flex items-center justify-center">
                                 <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
-                            <div class="khmer-moul text-[11px] text-blue-900 leading-tight mb-1 text-center w-full truncate" style="font-family: 'Moul', serif !important;">${st.nameKh}</div>
+                            <div class="khmer-moul text-[16.5px] text-blue-900 leading-tight mb-2 text-center w-full truncate" style="font-family: 'Moul', serif !important;">${st.nameKh}</div>
 
-                            <div class="w-full text-left space-y-0.5 text-[9px] text-slate-600 border-t border-slate-100 pt-1">
-                                <div class="flex"><span class="w-[58px] text-slate-400 font-medium">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
-                                <div class="flex"><span class="w-[58px] text-slate-400 font-medium">ថ្នាក់ / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
-                                <div class="flex"><span class="w-[58px] text-slate-400 font-medium">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
-                                <div class="flex"><span class="w-[58px] text-slate-400 font-medium">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-700">${st.dob}</span></div>
-                                <div class="flex"><span class="w-[58px] text-slate-400 font-medium">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-700 truncate">${st.address}</span></div>
+                            <div class="w-full text-left space-y-1 text-[11.5px] text-slate-800 border-t border-slate-200 pt-2">
+                                <div class="flex"><span class="w-[68px] text-slate-400 font-bold">ភេទ / Sex:</span><span class="font-bold text-slate-900">${st.gender}</span></div>
+                                <div class="flex"><span class="w-[68px] text-slate-400 font-bold">ថ្នាក់ / Class:</span><span class="font-bold text-slate-900">${st.studentClass}</span></div>
+                                <div class="flex"><span class="w-[68px] text-slate-400 font-bold">អត្តលេខ / ID:</span><span class="font-bold text-amber-600">${st.idNumber}</span></div>
+                                <div class="flex"><span class="w-[68px] text-slate-400 font-bold">ថ្ងៃខែឆ្នាំកំ.:</span><span class="font-bold text-slate-900">${st.dob}</span></div>
+                                <div class="flex"><span class="w-[68px] text-slate-400 font-bold">ទីកន្លែងបច្ចុ.:</span><span class="font-bold text-slate-900 truncate">${st.address}</span></div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 border-t border-slate-100 p-1 px-2 flex justify-between items-center h-[58px]">
-                            <div class="flex flex-col items-center justify-center w-[40px]">
-                                <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-200 rounded shadow-sm"></div>
-                                <p class="text-[5px] text-slate-400 font-bold mt-0.5 text-center whitespace-nowrap">ឆ្នាំសិក្សា ២០២៥-២០២៦</p>
+                        <div class="bg-slate-50 border-t border-slate-200 p-1.5 px-2.5 flex justify-between items-center h-[65px]">
+                            <div class="flex flex-col items-center justify-center w-[45px]">
+                                <div id="qr-node-${i}" class="bg-white p-0.5 border border-slate-300 rounded shadow-sm"></div>
+                                <p class="text-[7px] text-slate-400 font-bold mt-0.5 text-center whitespace-nowrap">២០២៥-២០២៦</p>
                             </div>
                             
-                            <div class="w-[155px] flex flex-col justify-between h-[50px] text-right">
-                                <div class="text-[6.5px] font-bold text-slate-500 leading-none block text-center truncate">
+                            <div class="w-[170px] flex flex-col justify-between h-[58px] text-right">
+                                <div class="text-[8.5px] font-bold text-slate-500 leading-none block text-center truncate">
                                     ${displayDate}
                                 </div>
-                                <div class="text-[7.5px] font-bold text-blue-800 leading-none text-center block my-0.5">
+                                <div class="text-[10.5px] font-bold text-blue-900 leading-none text-center block my-0.5">
                                     គ្រូបន្ទុកថ្នាក់
                                 </div>
-                                <div class="h-[10px]"></div> 
-                                <div class="text-[8px] font-bold text-slate-700 text-center border-t border-dashed border-slate-300 pt-0.5 block truncate uppercase">
-                                    ${displayTeacher}
+                                <div class="h-[12px]"></div> 
+                                <div class="text-[11.5px] font-bold text-slate-800 text-center border-t border-dashed border-slate-400 pt-0.5 block truncate uppercase">
+                                    ${teacherName}
                                 </div>
                             </div>
                         </div>
@@ -307,12 +289,13 @@
                 container.innerHTML += cardHtml;
             }
 
+            // បង្កើត QR Code ឡើងវិញ
             for(let i=1; i<=6; i++) {
                 document.getElementById(`qr-node-${i}`).innerHTML = '';
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
-                    width: 24,
-                    height: 24,
+                    width: 28,
+                    height: 28,
                     colorDark : "#1e3a8a", 
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.M
@@ -320,33 +303,23 @@
             }
         }
 
+        // មុខងារទាញយកជា PDF
         function downloadPDFFile() {
             const element = document.getElementById('printPageContainer');
-            
             const btn = document.querySelector('button[onclick="downloadPDFFile()"]');
             btn.innerHTML = "⏳ កំពុងទាញយក...";
             btn.disabled = true;
 
             const opt = {
                 margin:       [4, 4, 4, 4], 
-                filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ.pdf',
+                filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ_អក្សរធំ.pdf',
                 image:        { type: 'jpeg', quality: 1.0 },
-                html2canvas:  { 
-                    scale: 4, 
-                    useCORS: true, 
-                    letterRendering: false,
-                    scrollX: 0,
-                    scrollY: 0
-                }, 
+                html2canvas:  { scale: 4, useCORS: true }, 
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
-                btn.innerHTML = "📥 ទាញយក PDF";
-                btn.disabled = false;
-            }).catch(err => {
-                console.error(err);
-                btn.innerHTML = "📥 ទាញយក PDF";
+                btn.innerHTML = "📥 ទាញយកជា PDF";
                 btn.disabled = false;
             });
         }
