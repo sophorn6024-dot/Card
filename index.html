@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស - កំណែអក្សរធំច្បាស់</title>
+    <title>ប្រព័ន្ធបង្កើតកាតសិស្ស - សាលាបឋមសិក្សាកំពង់ល្ពៅ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -67,10 +67,10 @@
                         <h2 class="khmer-moul text-xl text-blue-800 tracking-wide leading-snug">
                             ប្រព័ន្ធបង្កើតកាតសិស្ស - សាលាបឋមសិក្សាកំពង់ល្ពៅ
                         </h2>
-                        <p class="text-sm text-emerald-600 font-bold">✨ កំណែអក្សរធំច្បាស់ពិសេស (Large Font Version)</p>
+                        <p class="text-sm text-emerald-600 font-bold">✨ កំណែឡូហ្គោក្រសួងអប់រំផ្លូវការ និងអក្សរធំច្បាស់</p>
                     </div>
                 </div>
-                <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3px-8 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-lg px-6 py-3">
+                <button onclick="downloadPDFFile()" class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-xl transition flex items-center justify-center gap-2 shadow-lg text-lg">
                     📥 ទាញយកជា PDF
                 </button>
             </div>
@@ -144,18 +144,8 @@
         let khmerDate = "";
         const defaultPhoto = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23cbd5e1' viewBox='0 0 24 24'><path d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/></svg>";
         
-        // ឡូហ្គោក្រសួងអប់រំ បែប Vector SVG បង្ហាញច្បាស់ ១០០% មិនបារម្ភរឿងបាត់រូបភាព
-        const moeysLogoSVG = `<svg viewBox="0 0 100 100" class="w-[28px] h-[28px] flex-shrink-0" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="48" fill="#ffffff" stroke="#eab308" stroke-width="2"/>
-            <circle cx="50" cy="50" r="44" fill="#1e3a8a"/>
-            <g fill="#eab308">
-                <path d="M25,72 Q50,82 75,72 Q65,65 50,65 Q35,65 25,72 Z"/>
-                <path d="M47,60 L53,60 L54,35 Q50,22 46,35 Z"/>
-                <path d="M50,16 Q57,28 53,45 Q47,45 44,28 Z" fill="#f59e0b"/>
-                <path d="M46,40 Q26,30 22,50 Q28,62 45,55 Q32,50 35,42 Q42,42 46,46 Z"/>
-                <path d="M54,40 Q74,30 78,50 Q72,62 55,55 Q68,50 65,42 Q58,42 54,46 Z"/>
-            </g>
-        </svg>`;
+        // ឡូហ្គោផ្លូវការរបស់ក្រសួងអប់រំ យុវជន និងកីឡា (ទម្រង់ព្រះសិង្ហឈរលើផ្កាឈូក និងកាំរស្មី) ជាប្រភេទ Base64 មិនបាត់រូបពេលទាញយកជា PDF
+        const moeysLogoImg = "data:image/png;base64,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";
 
         let cardsData = {};
         for(let i=1; i<=6; i++) {
@@ -240,9 +230,9 @@
                 const cardHtml = `
                     <div class="card-item">
                         
-                        <div class="bg-[#1e3a8a] text-white pt-2 pb-1 px-2 flex flex-col items-center justify-center border-b-2 border-[#d97706] h-[46px] text-center w-full">
+                        <div class="bg-[#1e3a8a] text-white pt-1.5 pb-1 px-2 flex flex-col items-center justify-center border-b-2 border-[#d97706] h-[46px] text-center w-full">
                             <div class="flex items-center justify-center gap-2 w-full">
-                                ${moeysLogoSVG}
+                                <img src="${moeysLogoImg}" class="w-[28px] h-[28px] object-contain flex-shrink-0" alt="MOEYS Logo">
                                 <div class="khmer-moul text-[12.5px] leading-none tracking-wide" style="font-family: 'Moul', serif !important;">សាលាបឋមសិក្សាកំពង់ល្ពៅ</div>
                             </div>
                             <p class="text-[7px] uppercase font-bold text-amber-300 tracking-wider leading-none mt-1 text-center w-full">Student Identity Card</p>
@@ -289,7 +279,7 @@
                 container.innerHTML += cardHtml;
             }
 
-            // បង្កើត QR Code ឡើងវិញ
+            // ដំណើរការបង្កើត QR Code ឡើងវិញ
             for(let i=1; i<=6; i++) {
                 document.getElementById(`qr-node-${i}`).innerHTML = '';
                 new QRCode(document.getElementById(`qr-node-${i}`), {
@@ -303,7 +293,7 @@
             }
         }
 
-        // មុខងារទាញយកជា PDF
+        // មុខងារទាញយកឯកសារជាប្រភេទ PDF
         function downloadPDFFile() {
             const element = document.getElementById('printPageContainer');
             const btn = document.querySelector('button[onclick="downloadPDFFile()"]');
@@ -312,7 +302,7 @@
 
             const opt = {
                 margin:       [4, 4, 4, 4], 
-                filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ_អក្សរធំ.pdf',
+                filename:     'កាតសិស្ស_សាលាកំពង់ល្ពៅ_ឡូហ្គោក្រសួង.pdf',
                 image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { scale: 4, useCORS: true }, 
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
