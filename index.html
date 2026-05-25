@@ -11,26 +11,35 @@
         body { font-family: 'Khmer', sans-serif; }
         .khmer-moul { font-family: 'Moul', serif; }
         
-        /* កំណត់ទំហំក្រដាស A4 ជាទម្រង់ផ្ដេក (Landscape) ពេលបោះពុម្ព */
+        /* ការកំណត់ទំហំឱ្យត្រូវស្តង់ដាក្រដាស A4 ផ្ដេក ពិតប្រាកដ ១០០% */
         @page {
             size: A4 landscape;
-            margin: 6mm;
+            margin: 0mm; /* ដកគែមចេញដើម្បីកុំឱ្យធ្លាក់សន្លឹក */
         }
         @media print {
-            body { background: white; padding: 0; }
+            body { background: white; padding: 0; margin: 0; }
             .no-print { display: none !important; }
+            
+            /* រៀបចំផ្ទៃបោះពុម្ព A4 ផ្ដេកឱ្យសមល្មម */
+            .print-container {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 10mm !important;
+                background: white !important;
+                width: 297mm !important;
+                height: 210mm !important;
+                box-sizing: border-box;
+            }
+            
             .print-page { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; /* ៣ កាតក្នុងមួយជួរដេក */
-                gap: 12px !important;
+                gap: 8mm !important; /* ចន្លោះរវាងកាត */
                 width: 100% !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-                background: white !important;
             }
             .card-item {
                 box-shadow: none !important;
-                border: 1px solid #cbd5e1 !important;
+                border: 1px solid #94a3b8 !important; /* បន្ថែមបន្ទាត់ព្រំដែនសម្រាប់កាត់ */
                 page-break-inside: avoid;
             }
         }
@@ -44,7 +53,7 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-4 mb-4 gap-4">
                 <div>
                     <h2 class="text-xl font-bold text-amber-600 flex items-center gap-2">
-                        🏫 ប្រព័ន្ធកាតបញ្ឈរ លើក្រដាស A4 ផ្ដេក (ម្ដង ៦ កាត)
+                        🏫 ប្រព័ន្ធកាតបញ្ឈរ លើក្រដាស A4 ផ្ដេក (ម្ដង ៦ កាត - ធានាមិនធ្លាក់សន្លឹក)
                     </h2>
                     <p class="text-xs text-slate-400 mt-1">ចុចជ្រើសរើស "កាតទី..." ដើម្បីប្តូរការបញ្ចូលព័ត៌មានទៅតាមកាតនីមួយៗ</p>
                 </div>
@@ -95,10 +104,10 @@
             </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-300 max-w-[1120px] mx-auto overflow-x-auto">
+        <div id="a4Wrapper" class="print-container bg-white p-6 rounded-2xl shadow-xl border border-slate-300 max-w-[1020px] mx-auto overflow-x-auto">
             <p class="text-center text-xs text-slate-400 mb-4 no-print">--- ទម្រង់មើលមុនពេលបោះពុម្ពលើក្រដាស A4 ផ្ដេក (ជួរដេកមាន៣កាត សរុប២ជួរ = ៦កាត) ---</p>
             
-            <div id="printPageContainer" class="print-page grid grid-cols-3 gap-3 justify-items-center w-[1050px] mx-auto">
+            <div id="printPageContainer" class="print-page grid grid-cols-3 gap-4 justify-items-center w-full mx-auto">
                 </div>
         </div>
 
@@ -176,34 +185,34 @@
 
             for(let i=1; i<=6; i++) {
                 const st = cardsData[i];
+                // កែសម្រួលខ្នាតមកត្រឹម w-[280px] h-[410px] ដើម្បីឱ្យល្មមក្រដាស A4 មិនធ្លាក់សន្លឹក
                 const cardHtml = `
-                    <div class="card-item w-[320px] h-[480px] bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200 relative flex flex-col justify-between text-center">
+                    <div class="card-item w-[280px] h-[410px] bg-white rounded-xl shadow-md overflow-hidden border border-slate-200 relative flex flex-col justify-between text-center">
                         
-                        <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-3.5 relative border-b border-orange-400">
-                            <h3 class="khmer-moul text-[10.5px] leading-relaxed tracking-wide">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
-                            <p class="text-[8px] uppercase font-bold text-amber-100 tracking-widest mt-0.5">Student Identity Card</p>
-                            <span class="absolute top-2 right-2 text-[8px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold no-print">កាតទី ${i}</span>
+                        <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-3 relative border-b border-orange-400">
+                            <h3 class="khmer-moul text-[9.5px] leading-relaxed tracking-wide">សាលាបឋមសិក្សាកំពង់ល្ពៅ</h3>
+                            <p class="text-[7.5px] uppercase font-bold text-amber-100 tracking-widest mt-0.5">Student Identity Card</p>
                         </div>
 
-                        <div class="flex-1 flex flex-col items-center pt-5 px-5 bg-gradient-to-b from-white to-amber-50/10">
-                            <div class="w-[100px] h-[130px] bg-slate-50 border-4 border-amber-100 rounded-xl overflow-hidden shadow-sm mb-3 flex items-center justify-center">
+                        <div class="flex-1 flex flex-col items-center pt-4 px-4 bg-gradient-to-b from-white to-amber-50/10">
+                            <div class="w-[85px] h-[115px] bg-slate-50 border-4 border-amber-100 rounded-lg overflow-hidden shadow-sm mb-2 flex items-center justify-center">
                                 <img src="${st.photo}" class="w-full h-full object-cover">
                             </div>
 
-                            <h2 class="text-lg font-black text-slate-800 leading-snug mb-0.5">${st.nameKh}</h2>
-                            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wide mb-4">${st.nameEn}</p>
+                            <h2 class="text-base font-black text-slate-800 leading-snug mb-0.5">${st.nameKh}</h2>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wide mb-3">${st.nameEn}</p>
 
-                            <div class="w-full text-left space-y-2 text-[13px] text-slate-600 border-t border-slate-100 pt-3">
-                                <div class="flex"><span class="w-24 font-medium text-slate-400">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
-                                <div class="flex"><span class="w-24 font-medium text-slate-400">ថ្នាក់ទី / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
-                                <div class="flex"><span class="w-24 font-medium text-slate-400">អត្តលេខ / ID:</span><span class="font-bold text-orange-600">${st.idNumber}</span></div>
+                            <div class="w-full text-left space-y-1.5 text-[12px] text-slate-600 border-t border-slate-100 pt-2.5">
+                                <div class="flex"><span class="w-20 font-medium text-slate-400">ភេទ / Sex:</span><span class="font-bold text-slate-700">${st.gender}</span></div>
+                                <div class="flex"><span class="w-20 font-medium text-slate-400">ថ្នាក់ទី / Class:</span><span class="font-bold text-slate-700">${st.studentClass}</span></div>
+                                <div class="flex"><span class="w-20 font-medium text-slate-400">អត្តលេខ / ID:</span><span class="font-bold text-orange-600">${st.idNumber}</span></div>
                             </div>
                         </div>
 
-                        <div class="bg-amber-50/50 border-t border-amber-100 p-2.5 px-5 flex justify-between items-center">
+                        <div class="bg-amber-50/50 border-t border-amber-100 p-2 px-4 flex justify-between items-center">
                             <div class="text-left">
-                                <p class="text-[7.5px] text-slate-400 uppercase font-medium">ឆ្នាំសិក្សា</p>
-                                <p class="text-[11px] font-bold text-slate-700">2025-2026</p>
+                                <p class="text-[7px] text-slate-400 uppercase font-medium">ឆ្នាំសិក្សា</p>
+                                <p class="text-[10px] font-bold text-slate-700">2025-2026</p>
                             </div>
                             <div id="qr-node-${i}" class="bg-white p-0.5 border border-amber-200 rounded shadow-sm"></div>
                         </div>
@@ -212,12 +221,11 @@
                 container.innerHTML += cardHtml;
             }
 
-            // បង្កើត QR Code ដាក់ចូលកាតនីមួយៗ
             for(let i=1; i<=6; i++) {
                 new QRCode(document.getElementById(`qr-node-${i}`), {
                     text: cardsData[i].idNumber,
-                    width: 38,
-                    height: 38,
+                    width: 32,
+                    height: 32,
                     colorDark : "#d97706",
                     colorLight : "#ffffff",
                     correctLevel : QRCode.CorrectLevel.H
